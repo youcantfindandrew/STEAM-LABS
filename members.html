@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEAMLabs - Our Team</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lato:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --theme-primary-blue: #0077ff;
+            --theme-primary-blue-darker: #005fcc;
+            --theme-dark-bg: #000000;
+            --theme-dark-card: #1a1a1a;
+            --theme-text-dark: #1f2937;
+            --theme-text-light: #f9fafb;
+            --theme-text-gray: #6b7280;
+            --theme-light-bg: #f9f9f9;
+            --theme-white: #ffffff;
+            --gg-text-heading: 'Montserrat', sans-serif;
+            --gg-text-sans: 'Lato', sans-serif;
+        }
+
+        /* Basic Reset & Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--gg-text-sans);
+            line-height: 1.7;
+            color: var(--theme-text-dark);
+            background-color: var(--theme-white);
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--gg-text-heading);
+            color: var(--theme-text-dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            color: var(--theme-text-gray);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--theme-primary-blue);
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem auto;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--theme-text-dark);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--theme-primary-blue);
+            border-bottom-color: var(--theme-primary-blue);
+        }
+
+        .nav-links a.active {
+            color: var(--theme-primary-blue);
+            border-bottom-color: var(--theme-primary-blue);
+        }
+
+        .nav-social {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-social a {
+            color: var(--theme-text-dark);
+        }
+
+        .nav-social svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--theme-text-dark);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 0;
+            width: 100%;
+        }
+
+        .section-bg-light {
+            background-color: var(--theme-light-bg);
+        }
+
+        /* Board Members Page Specific Styles */
+        .board-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .board-member-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .board-member-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-image-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1.5rem auto;
+            border: 5px solid var(--theme-white);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .board-member-card h3 {
+            margin-bottom: 0.25rem;
+        }
+
+        .board-member-card .title {
+            font-size: 1rem;
+            color: var(--theme-primary-blue);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .board-member-card .bio {
+            font-size: 0.9rem;
+            color: var(--theme-text-gray);
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* Leadership Section */
+        .leadership-section {
+            margin-bottom: 4rem;
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .leadership-card {
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 3rem 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #e5e7eb;
+        }
+
+        .leadership-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--theme-primary-blue);
+        }
+
+        .leadership-card .profile-image-container {
+            width: 180px;
+            height: 180px;
+            border: 6px solid #f3f4f6;
+        }
+
+        .leadership-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .leadership-card .title {
+            font-size: 1.1rem;
+            color: var(--theme-primary-blue);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .leadership-card .bio {
+            font-size: 0.95rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-subtitle h3 {
+            font-size: 1.5rem;
+            color: var(--theme-text-dark);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-subtitle h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--theme-primary-blue);
+        }
+
+        /* Chapter Leaders Section */
+        .chapter-leaders-section {
+            background-color: #f9f9f9;
+            padding: 4rem 0;
+            margin-top: 2rem;
+        }
+
+        .coming-soon-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 2px dashed #d1d5db;
+        }
+
+        .coming-soon-card h4 {
+            color: var(--theme-text-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .coming-soon-card p {
+            color: var(--theme-text-gray);
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .leadership-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--theme-dark-bg);
+            color: #9ca3af;
+            padding: 5rem 0 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer .container {
+            max-width: 1200px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-about {
+            max-width: 300px;
+        }
+
+        .footer-about p {
+            color: #9ca3af;
+            margin-top: 1rem;
+        }
+
+        .footer-grid {
+            display: flex;
+            gap: 4rem;
+            flex-grow: 1;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .footer-col h4 {
+            color: var(--theme-white);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col a {
+            color: #9ca3af;
+        }
+
+        .footer-col a:hover {
+            color: var(--theme-white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 0;
+            }
+
+            .nav-links,
+            .nav-social {
+                display: none;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            .nav-links-mobile {
+                display: flex;
+                position: fixed;
+                right: 0;
+                top: 0;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 70%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+                box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+                gap: 2rem;
+            }
+
+            .nav-links-mobile.nav-active {
+                transform: translateX(0%);
+            }
+
+            .toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .toggle .line2 {
+                opacity: 0;
+            }
+
+            .toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .footer-top,
+            .footer-grid {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="index.html" aria-label="STEAMLabs Home">
+                    <img src="https://i.ibb.co/Xf4CCb4j/Screenshot-2025-08-30-at-12-40-21-AM.png" alt="STEAMLabs Logo"
+                        class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="Impact.html">Impact</a></li>
+                <li><a href="members.html" class="active">Our Team</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://www.instagram.com/steamlabs_official" target="_blank" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.644-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                </a>
+            </div>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="board-page-section section-bg-light">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Meet Our Team</h2>
+                    <p>Our dedicated team members are passionate about STEM education and committed to our mission.
+                        Learn more about the individuals leading STEAMLabs.</p>
+                </div>
+
+                <!-- Leadership Section -->
+                <div class="leadership-section">
+                    <div class="section-subtitle">
+                        <h3>Leadership</h3>
+                    </div>
+                    <div class="leadership-grid">
+                        <div class="leadership-card">
+                            <div class="profile-image-container">
+                                <img src="https://i.ibb.co/ynX59gpY/image-1-Copy.png" alt="Anna Han profile picture"
+                                    decoding="async">
+                            </div>
+                            <h3>Anna Han</h3>
+                            <p class="title">International President</p>
+                            <p class="bio">Hi! I'm Anna, a rising senior from Portland, Oregon and also the founder &
+                                current International President of STEAM Labs. I lead the operations and logistics that
+                                happen within STEAM Labs, helping to make our global programs possible.</p>
+                        </div>
+
+                        <div class="leadership-card">
+                            <div class="profile-image-container">
+                                <img src="https://i.ibb.co/qFBXZ5Ty/1756339318053.png"
+                                    alt="Daniel Zhang profile picture" decoding="async">
+                            </div>
+                            <h3>Daniel Zhang</h3>
+                            <p class="title">U.S. National President</p>
+                            <p class="bio">Hey everyone! I'm Daniel Zhang, and I'm the U.S. National President of STEAM
+                                Labs! I'm a rising junior from sunny San Diego, California, and I also co-lead the
+                                Communications Team.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Board Members Section -->
+                <div class="section-subtitle">
+                    <h3>Board Members</h3>
+                </div>
+
+                <div class="board-grid">
+                    <div class="board-member-card">
+                        <div class="profile-image-container">
+                            <img src="https://i.ibb.co/3YjxLdtf/image-3-Copy.png" alt="Joseph Liu profile picture"
+                                decoding="async">
+                        </div>
+                        <h3>Joseph Liu</h3>
+                        <p class="title">Materials & Organization</p>
+                        <p class="bio">Hi! I'm Joseph Liu, a rising senior from Austin, Texas, and I'm grateful to be
+                            the Materials & Organization group leader. Here, we help make documents to streamline the
+                            processes of individual teams, as well as the materials/procedure documents! Outside this, I
+                            enjoy cross-country running, playing my PS5, reading good-ol' classics, and doing other
+                            research.</p>
+                    </div>
+
+                    <div class="board-member-card">
+                        <div class="profile-image-container">
+                            <img src="https://i.ibb.co/TDDDFn20/image-4-Copy.png" alt="Jenny Wu profile picture"
+                                loading="lazy" decoding="async">
+                        </div>
+                        <h3>Jenny Wu</h3>
+                        <p class="title">Experimentation & Development</p>
+                        <p class="bio">Hi! I'm Jenny, and I'm a sophomore from Houston, TX. As the experimentation group
+                            leader, I work with others to develop experiment procedures, finalize materials lists, and
+                            standardize measurements across chapters while helping brainstorm new experiments!</p>
+                    </div>
+
+                    <div class="board-member-card">
+                        <div class="profile-image-container">
+                            <img src="https://i.ibb.co/zTh68hmR/image-5-Copy.png" alt="Hannah Oh profile picture"
+                                loading="lazy" decoding="async">
+                        </div>
+                        <h3>Hannah Oh</h3>
+                        <p class="title">Illustration & Design</p>
+                        <p class="bio">Hello! My name's Hannah Oh I am a rising Senior from Sunset High School in
+                            Portland, OR. I am the national leader of the Illustration Team, where we work to make
+                            children's coloring books and other creative pieces that bring kids closer to STEM
+                            education!</p>
+                    </div>
+
+                    <div class="board-member-card">
+                        <div class="profile-image-container">
+                            <img src="https://i.ibb.co/GSHZC8G/image-6-Copy.png" alt="Sophia Lee profile picture"
+                                loading="lazy" decoding="async">
+                        </div>
+                        <h3>Sophia Lee</h3>
+                        <p class="title">Inductions & Training</p>
+                        <p class="bio">Hello! I am Sophia Lee, and I am a rising Senior from Portland, Oregon. As a
+                            leader of the inductions team, Kacey and I work with new members to make sure everyone is
+                            well prepared to help spread STEM education worldwide!</p>
+                    </div>
+
+                    <div class="board-member-card">
+                        <div class="profile-image-container">
+                            <img src="https://i.ibb.co/5hYRMgNJ/image-7-Copy.png" alt="Kacey Song profile picture"
+                                loading="lazy" decoding="async">
+                        </div>
+                        <h3>Kacey Song</h3>
+                        <p class="title">Inductions & Training</p>
+                        <p class="bio">Hello! I'm Kacey Song, and I am an upcoming junior from Coppell, Texas. I am very
+                            driven to help spread the wonders of STEM education to underserved communities worldwide,
+                            and being on the induction team with Sophia will ensure we execute our goal!</p>
+                    </div>
+
+                    <div class="board-member-card">
+                        <div class="profile-image-container">
+                            <img src="https://i.ibb.co/v6vqQFcW/image-8-Copy.png" alt="Daniel Suh profile picture"
+                                loading="lazy" decoding="async">
+                        </div>
+                        <h3>Daniel Suh</h3>
+                        <p class="title">Member Communications</p>
+                        <p class="bio">Hi! I'm Daniel, and I'm a rising senior from California. I'm part of the
+                            communications team which I lead with Daniel Zhang, and I'm excited about making STEM
+                            education more accessible to people in my community and around the United States. I'm
+                            excited to support this program's mission and collaborate with everyone to execute this
+                            goal.</p>
+                    </div>
+
+                    <div class="board-member-card">
+                        <div class="profile-image-container">
+                            <img src="https://i.ibb.co/pjzscxB8/image-9-Copy.png" alt="Judy Song profile picture"
+                                loading="lazy" decoding="async">
+                        </div>
+                        <h3>Judy Song</h3>
+                        <p class="title">Public Relations</p>
+                        <p class="bio">Hey! I'm Judy, an incoming junior from Texas, and I'm the leader for the STEAM
+                            Labs social media team! I'm excited to spread our mission across digital media sites and
+                            increase the breadth of our connection and outreach. I'm looking forward to working with you
+                            all!</p>
+                    </div>
+                </div>
+
+                <!-- Chapter Leaders Section -->
+                <section class="chapter-leaders-section">
+                    <div class="section-subtitle">
+                        <h3>Chapter Leaders</h3>
+                    </div>
+                    <div class="coming-soon-card">
+                        <h4>Coming Soon</h4>
+                        <p>Meet the dedicated leaders running our 11 chapters across the United States. Check back soon!
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <a href="index.html" aria-label="STEAMLabs Home">
+                        <img src="https://i.ibb.co/Xf4CCb4j/Screenshot-2025-08-30-at-12-40-21-AM.png"
+                            alt="STEAMLabs Logo" class="logo-img">
+                    </a>
+                    <p>STEAMLabs is a not-for-profit organization. <a href="index.html#donate">Donate today!</a></p>
+                </div>
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h4>About</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="members.html">Our Team</a></li>
+                            <li><a href="Impact.html">Our Impact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="index.html#get-involved">Get Involved</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul>
+                            <li><a href="mailto:steamlabsintl@gmail.com">steamlabsintl@gmail.com</a></li>
+                        </ul>
+                        <h4>Follow Us</h4>
+                        <div class="nav-social" style="gap: 1rem;">
+                            <a href="https://www.instagram.com/steamlabs_official" target="_blank"
+                                aria-label="Instagram">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.644-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 STEAMLabs. All Rights Reserved. STEAMLabs is a registered 501(c)(3) nonprofit
+                    organization.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const burger = document.querySelector('.burger');
+            const navLinksContainer = document.querySelector('header');
+            burger.addEventListener('click', () => {
+                burger.classList.toggle('toggle');
+                let nav = document.querySelector('.nav-links-mobile');
+                if (nav) {
+                    nav.remove();
+                } else {
+                    nav = document.createElement('ul');
+                    nav.className = 'nav-links-mobile';
+                    nav.innerHTML = `
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="Impact.html">Impact</a></li>
+                        <li><a href="members.html">Our Team</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    `;
+                    navLinksContainer.appendChild(nav);
+                    setTimeout(() => nav.classList.add('nav-active'), 10);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

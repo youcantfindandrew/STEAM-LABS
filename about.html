@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEAMLabs | About Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lato:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --theme-primary-blue: #ffffff;
+            --theme-primary-blue-darker: #e5e5e5;
+            --theme-dark-bg: #0a0a0a;
+            --theme-dark-card: #141414;
+            --theme-text-dark: #1f2937;
+            --theme-text-light: #f9fafb;
+            --theme-text-gray: #9ca3af;
+            --theme-light-bg: #f9f9f9;
+            --theme-white: #ffffff;
+            --gg-text-heading: 'Montserrat', sans-serif;
+            --gg-text-sans: 'Lato', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--gg-text-sans);
+            line-height: 1.7;
+            color: var(--theme-text-light);
+            background-color: var(--theme-dark-bg);
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--gg-text-heading);
+            color: var(--theme-text-light);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+        }
+
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            color: var(--theme-text-gray);
+        }
+
+        a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+            border-bottom-color: var(--theme-primary-blue);
+        }
+
+        .nav-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-social a {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .nav-social a:hover {
+            color: #fff;
+        }
+
+        .nav-social svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+            overflow: hidden;
+            padding: 8rem 0 6rem;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: #fff;
+            color: #000;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: transparent;
+            color: #fff;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Mission Section */
+        .mission-section {
+            padding: 8rem 0;
+            background: var(--theme-dark-bg);
+            position: relative;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .mission-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-content p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .mission-highlight {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-highlight::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 8rem;
+            color: rgba(255, 255, 255, 0.05);
+            font-family: serif;
+        }
+
+        .mission-highlight p {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.9);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 0;
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 8rem 0;
+            background: #000;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .value-card {
+            background: var(--theme-dark-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #fff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .value-card:hover::before {
+            opacity: 1;
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover .value-icon {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .value-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .value-card p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0;
+            line-height: 1.7;
+        }
+
+        /* Story Section */
+        .story-section {
+            padding: 8rem 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+                url('https://i.ibb.co/LDdnHD1w/Katy-The-Learning-Experience-Katy-Mills-1.jpg') center/cover fixed;
+            position: relative;
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .story-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .story-content p {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .story-content strong {
+            color: var(--theme-primary-blue);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 5rem 0;
+            background: var(--theme-dark-bg);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-family: var(--gg-text-heading);
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #fff;
+            display: block;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Team CTA Section */
+        .team-cta-section {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            text-align: center;
+        }
+
+        .team-cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .team-cta-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .team-cta-content p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 5rem 0 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-about {
+            max-width: 300px;
+        }
+
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 1rem;
+        }
+
+        .footer-grid {
+            display: flex;
+            gap: 4rem;
+            flex-grow: 1;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-col a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .nav-links,
+            .nav-social {
+                display: none;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            .mission-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .hero-section {
+                padding: 7rem 0 4rem;
+                min-height: auto;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links-mobile {
+                position: fixed;
+                right: 0;
+                top: 0;
+                height: 100vh;
+                background: #0a0a0a;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 70%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease;
+                gap: 2rem;
+                list-style: none;
+            }
+
+            .nav-links-mobile.nav-active {
+                transform: translateX(0%);
+            }
+
+            .nav-links-mobile a {
+                color: #fff;
+                font-size: 1.2rem;
+            }
+
+            .toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .toggle .line2 {
+                opacity: 0;
+            }
+
+            .toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .footer-top,
+            .footer-grid {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://i.ibb.co/Xf4CCb4j/Screenshot-2025-08-30-at-12-40-21-AM.png" alt="STEAMLabs Logo"
+                        class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="Impact.html">Impact</a></li>
+                <li><a href="members.html">Our Team</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://www.instagram.com/steamlabs_official" target="_blank" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.644-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                </a>
+            </div>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <span class="hero-badge">About STEAMLabs</span>
+                    <h1>Inspiring the Next Generation of Innovators</h1>
+                    <p>We believe every child deserves access to quality STEM education. Through hands-on learning and
+                        mentorship, we're breaking down barriers and sparking curiosity worldwide.</p>
+                    <div class="hero-cta">
+                        <a href="members.html" class="btn-primary">
+                            Meet Our Team
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </a>
+                        <a href="Impact.html" class="btn-secondary">
+                            See Our Impact
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="mission-section">
+            <div class="container">
+                <div class="mission-grid">
+                    <div class="mission-content">
+                        <h2>Our Mission</h2>
+                        <p>We envision a world where every child can experiment fearlessly and learn freely. STEAMLabs
+                            is dedicated to closing opportunity gaps by delivering accessible, high-quality STEM
+                            programs to under-resourced schools and communities.</p>
+                        <p>Our philosophy is simple: STEM should be experienced, not just studied. Through hands-on
+                            workshops, peer mentorship, and community partnerships, we're making science accessible to
+                            all.</p>
+                    </div>
+                    <div class="mission-highlight">
+                        <p>STEM education isn't just about building scientists—it's about nurturing critical thinkers,
+                            problem solvers, and the changemakers of tomorrow.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">Countries Reached</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">11</span>
+                        <span class="stat-label">Active Chapters</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1,000+</span>
+                        <span class="stat-label">Students Inspired</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label">Volunteers</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Core Values</h2>
+                    <p>The principles that guide everything we do</p>
+                </div>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">💡</div>
+                        <h3>Innovation</h3>
+                        <p>We champion creative thinking and encourage novel approaches to learning and problem-solving.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🧠</div>
+                        <h3>Inclusivity</h3>
+                        <p>We are committed to creating equitable opportunities, ensuring every student has access to
+                            quality STEM education.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🌱</div>
+                        <h3>Empowerment</h3>
+                        <p>We foster confidence and equip students with the tools to take ownership of their learning
+                            journey.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🌍</div>
+                        <h3>Global Impact</h3>
+                        <p>We strive to make a difference worldwide, connecting communities through the power of STEM.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">⚖️</div>
+                        <h3>Integrity</h3>
+                        <p>We operate with transparency, honesty, and a strong ethical compass in all our endeavors.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">❤️</div>
+                        <h3>Passion</h3>
+                        <p>Our work is driven by a deep passion for education and a belief in the potential of every
+                            student.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Story Section -->
+        <section class="story-section">
+            <div class="container">
+                <div class="story-content">
+                    <h2>Our Story So Far</h2>
+                    <p>Founded with a passion for bridging educational disparities, STEAMLabs began as a small
+                        initiative to bring engaging science workshops to local communities. Over the years, our vision
+                        has grown, leading us to establish partnerships and expand our reach internationally.</p>
+                    <p>From humble beginnings, we've remained steadfast in our commitment to making <strong>STEM
+                            accessible and inspiring</strong> for all, driven by countless success stories and the
+                        unwavering belief in every child's potential.</p>
+                    <p>We believe that by investing in STEM education, we are not just teaching subjects, but nurturing
+                        the next generation of <strong>inventors, scientists, artists, and critical thinkers</strong>
+                        who will shape a better future for everyone.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team CTA Section -->
+        <section class="team-cta-section">
+            <div class="container">
+                <div class="team-cta-content">
+                    <h2>Meet Our Dedicated Team</h2>
+                    <p>Our work is powered by a diverse group of passionate individuals committed to our mission. Get to
+                        know the leaders behind STEAMLabs.</p>
+                    <a href="members.html" class="btn-primary">
+                        View Our Team
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <a href="index.html">
+                        <img src="https://i.ibb.co/Xf4CCb4j/Screenshot-2025-08-30-at-12-40-21-AM.png"
+                            alt="STEAMLabs Logo" class="logo-img">
+                    </a>
+                    <p>STEAMLabs is a not-for-profit organization. <a href="index.html#donate"
+                            style="color: #60a5fa;">Donate today!</a></p>
+                </div>
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h4>About</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="members.html">Our Team</a></li>
+                            <li><a href="Impact.html">Our Impact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="gallery.html">Gallery</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul>
+                            <li><a href="mailto:steamlabsintl@gmail.com">steamlabsintl@gmail.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 STEAMLabs. All Rights Reserved. STEAMLabs is a registered 501(c)(3) nonprofit
+                    organization.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const burger = document.querySelector('.burger');
+            const header = document.querySelector('header');
+
+            burger.addEventListener('click', () => {
+                burger.classList.toggle('toggle');
+                let nav = document.querySelector('.nav-links-mobile');
+                if (nav) {
+                    nav.remove();
+                } else {
+                    nav = document.createElement('ul');
+                    nav.className = 'nav-links-mobile';
+                    nav.innerHTML = `
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="Impact.html">Impact</a></li>
+                        <li><a href="members.html">Our Team</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    `;
+                    header.appendChild(nav);
+                    setTimeout(() => nav.classList.add('nav-active'), 10);
+                }
+            });
+
+            // Intersection Observer for fade-in animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.value-card, .stat-item').forEach(el => {
+                el.style.opacity = '0';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>

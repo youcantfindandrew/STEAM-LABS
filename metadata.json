@@ -1,0 +1,5 @@
+{
+  "name": "Steamlabs",
+  "description": "Upload an HTML file and use natural language prompts to have an AI edit the code for you. See a live preview of the changes.",
+  "requestFramePermissions": []
+}

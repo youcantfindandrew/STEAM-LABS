@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEAMLabs | Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lato:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --theme-primary-blue: #000000;
+            --theme-primary-blue-darker: #333333;
+            --theme-dark-bg: #000000;
+            --theme-dark-card: #1a1a1a;
+            --theme-text-dark: #1f2937;
+            --theme-text-light: #f9fafb;
+            --theme-text-gray: #6b7280;
+            --theme-light-bg: #f9f9f9;
+            --theme-white: #ffffff;
+            --gg-text-heading: 'Montserrat', sans-serif;
+            --gg-text-sans: 'Lato', sans-serif;
+        }
+
+        /* Basic Reset & Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--gg-text-sans);
+            line-height: 1.7;
+            color: var(--theme-text-dark);
+            background-color: var(--theme-white);
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--gg-text-heading);
+            color: var(--theme-text-dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            color: var(--theme-text-gray);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--theme-primary-blue);
+            transition: color 0.2s ease-in-out;
+        }
+
+        a:hover {
+            color: var(--theme-primary-blue-darker);
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem auto;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s;
+            margin-top: 1rem;
+            border: 2px solid var(--theme-primary-blue);
+            background-color: var(--theme-primary-blue);
+            color: var(--theme-white);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 119, 255, 0.3);
+            background-color: var(--theme-primary-blue-darker);
+            border-color: var(--theme-primary-blue-darker);
+            color: var(--theme-white);
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--theme-text-dark);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--theme-primary-blue);
+            border-bottom-color: var(--theme-primary-blue);
+        }
+
+        .nav-links a.active {
+            color: var(--theme-primary-blue);
+            border-bottom-color: var(--theme-primary-blue);
+        }
+
+        .nav-social {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-social a {
+            color: var(--theme-text-dark);
+        }
+
+        .nav-social a:hover {
+            color: var(--theme-primary-blue);
+        }
+
+        .nav-social svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--theme-text-dark);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Section Styling (General) */
+        section {
+            padding: 6rem 0;
+            width: 100%;
+        }
+
+        .section-bg-light {
+            background-color: var(--theme-light-bg);
+        }
+
+        /* Gallery Section Specific Styles */
+        .gallery-grid {
+            column-count: 3;
+            column-gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            /* Fix for column-break issue */
+            width: 100%;
+            /* Fix for column-break issue */
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gallery-item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            padding: 2rem 1rem 1rem;
+            color: var(--theme-white);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-item-info {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-item-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--theme-white);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--theme-dark-bg);
+            color: #9ca3af;
+            padding: 5rem 0 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer .container {
+            max-width: 1200px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-about {
+            max-width: 300px;
+        }
+
+        .footer-about p {
+            color: #9ca3af;
+            margin-top: 1rem;
+        }
+
+        .footer-grid {
+            display: flex;
+            gap: 4rem;
+            flex-grow: 1;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .footer-col h4 {
+            color: var(--theme-white);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col a {
+            color: #9ca3af;
+        }
+
+        .footer-col a:hover {
+            color: var(--theme-white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .gallery-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 0;
+            }
+
+            .nav-links,
+            .nav-social {
+                display: none;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            .nav-links-mobile {
+                display: flex;
+                position: fixed;
+                right: 0;
+                top: 0;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 70%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+                box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+                gap: 2rem;
+            }
+
+            .nav-links-mobile.nav-active {
+                transform: translateX(0%);
+            }
+
+            .toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .toggle .line2 {
+                opacity: 0;
+            }
+
+            .toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .footer-top,
+            .footer-grid {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                column-count: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html" aria-label="STEAMLabs Home">
+                    <img src="https://i.ibb.co/Xf4CCb4j/Screenshot-2025-08-30-at-12-40-21-AM.png" alt="STEAMLabs Logo"
+                        class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="Impact.html">Impact</a></li>
+                <li><a href="members.html">Our Team</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://www.instagram.com/steamlabs_official" target="_blank" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.644-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                </a>
+            </div>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="gallery-section section-bg-light">
+            <div class="container">
+                <div class="section-title">
+                    <h1>Our Gallery</h1>
+                    <p>A collection of moments from our workshops, events, and community engagements.</p>
+                </div>
+                <div id="gallery-grid" class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/PvFw5WTR/Houston-Notting-Park-1.jpg" alt="STEAMLabs workshop at Houston Notting Park" loading="lazy" decoding="async">
+                        <div class="gallery-item-info"><p>Houston, Notting Park</p></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/93pd2SQZ/Glow-in-the-dark-personal-5.jpg" alt="Glow in the dark personal project display" loading="lazy" decoding="async">
+                        <div class="gallery-item-info"><p>Personal Project</p></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/CK5W7gwz/Glow-in-the-dark-personal-4.jpg" alt="Glow in the dark personal project artwork" loading="lazy" decoding="async">
+                        <div class="gallery-item-info"><p>Personal Project</p></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/Rpj8Xw6W/Katy-The-Learning-Experience-Katy-Mills-2.jpg" alt="STEAMLabs session at The Learning Experience Katy Mills" loading="lazy" decoding="async">
+                        <div class="gallery-item-info"><p>Katy, The Learning Experience Katy Mills</p></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/GvVcXDD6/Portland-Rivergrove-Elementary-School.jpg" alt="Workshop at Portland Rivergrove Elementary School" loading="lazy" decoding="async">
+                        <div class="gallery-item-info"><p>Portland, Rivergrove Elementary School</p></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/YBBLjpNG/Portland-Rockcreek-Elementary-School-2.jpg" alt="Session at Portland Rockcreek Elementary School" loading="lazy" decoding="async">
+                        <div class="gallery-item-info"><p>Portland, Rockcreek Elementary School</p></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/SqNXJwj/San-Diego-CA-Pacific-Highlands-Ranch-Library-2.jpg" alt="Event at San Diego Pacific Highlands Ranch Library" loading="lazy" decoding="async">
+                        <div class="gallery-item-info"><p>San Diego, Pacific Highlands Ranch Library</p></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/j9JtMYg4/San-Diego-CA-Pacific-Highlands-Ranch-Library-1.jpg" alt="Workshop at San Diego Pacific Highlands Ranch Library" loading="lazy" decoding="async">
+                        <div class="gallery-item-info"><p>San Diego, Pacific Highlands Ranch Library</p></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/ntmW7DV/San-Diego-CA-Pacific-Highlands-Ranch-Library.jpg" alt="Students at San Diego Pacific Highlands Ranch Library" loading="lazy" decoding="async">
+                        <div class="gallery-item-info"><p>San Diego, Pacific Highlands Ranch Library</p></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/C59R02HN/Sugarland-TX-The-Learning-Experience-Spring-Branch-1.jpg" alt="STEAMLabs at The Learning Experience Spring Branch in Sugarland" loading="lazy" decoding="async">
+                        <div class="gallery-item-info"><p>Sugarland, The Learning Experience Spring Branch</p></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/tPNwGdfj/Sugarland-TX-The-Learning-Experience-Spring-Branch.jpg" alt="Workshop at The Learning Experience Spring Branch in Sugarland" loading="lazy" decoding="async">
+                        <div class="gallery-item-info"><p>Sugarland, The Learning Experience Spring Branch</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <a href="index.html" aria-label="STEAMLabs Home">
+                        <img src="https://i.ibb.co/Xf4CCb4j/Screenshot-2025-08-30-at-12-40-21-AM.png"
+                            alt="STEAMLabs Logo" class="logo-img">
+                    </a>
+                    <p>STEAMLabs is a not-for-profit organization. <a href="index.html#donate">Donate today!</a></p>
+                </div>
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h4>About</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="members.html">Our Team</a></li>
+                            <li><a href="Impact.html">Our Impact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="index.html#get-involved">Get Involved</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul>
+                            <li><a href="mailto:steamlabsintl@gmail.com">steamlabsintl@gmail.com</a></li>
+                        </ul>
+                        <h4>Follow Us</h4>
+                        <div class="nav-social" style="gap: 1rem;">
+                            <a href="https://www.instagram.com/steamlabs_official" target="_blank"
+                                aria-label="Instagram">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.644-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 STEAMLabs. All Rights Reserved. STEAMLabs is a registered 501(c)(3) nonprofit
+                    organization.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Mobile Nav
+            const burger = document.querySelector('.burger');
+            const navLinksContainer = document.querySelector('header');
+            burger.addEventListener('click', () => {
+                burger.classList.toggle('toggle');
+                let nav = document.querySelector('.nav-links-mobile');
+                if (nav) {
+                    nav.remove();
+                } else {
+                    nav = document.createElement('ul');
+                    nav.className = 'nav-links-mobile';
+                    nav.innerHTML = `
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="Impact.html">Impact</a></li>
+                        <li><a href="members.html">Our Team</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    `;
+                    navLinksContainer.appendChild(nav);
+                    setTimeout(() => nav.classList.add('nav-active'), 10);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
