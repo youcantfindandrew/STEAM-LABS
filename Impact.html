@@ -79,7 +79,6 @@
             margin: 0 auto;
         }
 
-        /* Header & Navigation */
         header {
             position: absolute;
             top: 0;
@@ -155,7 +154,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Hero Section */
         .impact-hero {
             position: relative;
             height: 60vh;
@@ -184,7 +182,6 @@
             font-size: clamp(2rem, 4vw, 3rem);
         }
 
-        /* Wave Divider */
         .wave-divider {
             position: relative;
             margin-top: -80px;
@@ -196,7 +193,6 @@
             width: 100%;
         }
 
-        /* Stats Section */
         .stats-section {
             background-color: var(--theme-white);
             padding: 3rem 0 4rem;
@@ -237,7 +233,6 @@
             line-height: 1.4;
         }
 
-        /* Initiatives Section */
         .initiatives-section {
             background-color: var(--theme-dark-bg);
             padding: 5rem 0;
@@ -312,7 +307,6 @@
             background-color: #1a1a3e;
         }
 
-        /* CTA Section */
         .cta-section {
             background-color: var(--theme-light-bg);
             padding: 5rem 0;
@@ -368,7 +362,6 @@
             color: var(--theme-white);
         }
 
-        /* Footer */
         footer {
             background-color: #000;
             color: #9ca3af;
@@ -433,7 +426,6 @@
             text-align: center;
         }
 
-        /* Responsive */
         @media (max-width: 1024px) {
             .stats-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -550,21 +542,18 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section class="impact-hero">
             <div class="hero-title-box">
                 <h1>Impact, Initiatives, & Events</h1>
             </div>
         </section>
 
-        <!-- Wave Divider -->
         <div class="wave-divider">
             <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                 <path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,60 1440,60 L1440,120 L0,120 Z" fill="#ffffff" />
             </svg>
         </div>
 
-        <!-- Stats Section -->
         <section class="stats-section">
             <div class="container">
                 <div class="stats-grid">
@@ -596,7 +585,6 @@
             </div>
         </section>
 
-        <!-- Initiatives Section -->
         <section class="initiatives-section">
             <div class="container">
                 <h2>Highlights from some of our initiatives...</h2>
@@ -652,7 +640,6 @@
             </div>
         </section>
 
-        <!-- CTA Section -->
         <section class="cta-section">
             <div class="container">
                 <h2>Join Us in Making a Difference</h2>
@@ -690,6 +677,7 @@
                         <h4>Resources</h4>
                         <ul>
                             <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="upload.html">Chapter Portal</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">
@@ -709,7 +697,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Mobile navigation
             const burger = document.querySelector('.burger');
             const navLinksContainer = document.querySelector('header');
             burger.addEventListener('click', () => {
@@ -733,7 +720,6 @@
                 }
             });
 
-            // Animated counters
             const counters = document.querySelectorAll('.number[data-goal]');
             const observerOptions = { threshold: 0.5 };
 

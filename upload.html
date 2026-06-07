@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEAMLabs | Chapter Upload Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+
+    <style>
+        :root {
+            --theme-primary-blue: #000000;
+            --theme-primary-blue-darker: #333333;
+            --theme-dark-bg: #000000;
+            --theme-dark-card: #1a1a1a;
+            --theme-text-dark: #1f2937;
+            --theme-text-light: #f9fafb;
+            --theme-text-gray: #6b7280;
+            --theme-light-bg: #f9f9f9;
+            --theme-white: #ffffff;
+            --gg-text-heading: 'Montserrat', sans-serif;
+            --gg-text-sans: 'Lato', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--gg-text-sans);
+            line-height: 1.7;
+            color: var(--theme-text-dark);
+            background-color: var(--theme-white);
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--gg-text-heading);
+            color: var(--theme-text-dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: clamp(2rem, 4vw, 3rem); }
+        h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+        p { margin-bottom: 1rem; font-size: 1.05rem; color: var(--theme-text-gray); }
+
+        a { text-decoration: none; color: var(--theme-primary-blue); transition: color 0.2s ease-in-out; }
+        a:hover { color: var(--theme-primary-blue-darker); }
+
+        .container { max-width: 1100px; width: 90%; margin: 0 auto; }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-family: var(--gg-text-heading);
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s;
+            border: 2px solid var(--theme-primary-blue);
+            background-color: var(--theme-primary-blue);
+            color: var(--theme-white);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background-color: var(--theme-primary-blue-darker);
+            border-color: var(--theme-primary-blue-darker);
+            color: var(--theme-white);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--theme-primary-blue);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--theme-primary-blue);
+            color: var(--theme-white);
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .logo-img { height: 50px; width: auto; display: block; }
+
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+
+        .nav-links a {
+            color: var(--theme-text-dark);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--theme-primary-blue);
+            border-bottom-color: var(--theme-primary-blue);
+        }
+
+        .nav-social { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-social a { color: var(--theme-text-dark); }
+        .nav-social a:hover { color: var(--theme-primary-blue); }
+        .nav-social svg { width: 24px; height: 24px; }
+
+        .burger { display: none; cursor: pointer; z-index: 1001; }
+        .burger div { width: 25px; height: 3px; background-color: var(--theme-text-dark); margin: 5px; transition: all 0.3s ease; }
+
+        /* Password Gate */
+        #password-gate {
+            position: fixed;
+            inset: 0;
+            background: var(--theme-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .gate-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 3rem;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .gate-card .logo-img { margin: 0 auto 2rem; height: 55px; }
+
+        .gate-card h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+
+        .gate-card p { font-size: 0.95rem; margin-bottom: 2rem; }
+
+        .gate-input-wrap { position: relative; margin-bottom: 1rem; }
+
+        .gate-input-wrap input {
+            width: 100%;
+            padding: 14px 48px 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: var(--gg-text-sans);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .gate-input-wrap input:focus { border-color: #000; }
+
+        .toggle-pw {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #9ca3af;
+            padding: 0;
+        }
+
+        .toggle-pw:hover { color: #374151; }
+
+        .gate-error {
+            display: none;
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Portal content */
+        #portal-content { display: none; }
+
+        section { padding: 5rem 0; }
+        .section-bg-light { background-color: var(--theme-light-bg); }
+
+        /* Upload card */
+        .upload-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+        .form-group.full { grid-column: 1 / -1; }
+
+        .form-group label {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--theme-text-dark);
+            font-family: var(--gg-text-heading);
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            padding: 12px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: var(--gg-text-sans);
+            color: var(--theme-text-dark);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus { border-color: #000; }
+        .form-group input::placeholder { color: #9ca3af; }
+
+        .upload-trigger {
+            width: 100%;
+            margin-top: 0.5rem;
+            padding: 16px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
+        .upload-trigger svg { width: 20px; height: 20px; }
+
+        .form-hint {
+            font-size: 0.825rem;
+            color: var(--theme-text-gray);
+            margin-top: 0.75rem;
+            text-align: center;
+        }
+
+        /* Steps guide */
+        .steps-section {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .steps-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1.25rem;
+            color: var(--theme-text-dark);
+        }
+
+        .steps-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .steps-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-text strong { display: block; font-family: var(--gg-text-heading); font-size: 0.95rem; color: var(--theme-text-dark); }
+        .step-text span { font-size: 0.875rem; color: var(--theme-text-gray); }
+
+        /* Results area */
+        #results-section {
+            display: none;
+            max-width: 700px;
+            margin: 2rem auto 0;
+        }
+
+        .success-banner {
+            background: #f0fdf4;
+            border: 1.5px solid #86efac;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-banner svg { width: 22px; height: 22px; color: #16a34a; flex-shrink: 0; }
+        .success-banner p { margin: 0; color: #15803d; font-weight: 600; font-size: 0.95rem; }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .preview-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .preview-item img { width: 100%; height: 120px; object-fit: cover; display: block; }
+
+        .preview-item-caption {
+            background: #f9fafb;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.75rem;
+            color: var(--theme-text-gray);
+            text-align: center;
+        }
+
+        .export-box {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+
+        .export-box h4 { font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--theme-text-dark); }
+
+        .export-box pre {
+            background: #1f2937;
+            color: #f9fafb;
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 0.78rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+            max-height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .export-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+        /* Footer */
+        footer {
+            background-color: var(--theme-dark-bg);
+            color: #9ca3af;
+            padding: 4rem 0 2rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-top { display: flex; justify-content: space-between; gap: 3rem; margin-bottom: 3rem; flex-wrap: wrap; }
+        .footer-about { max-width: 300px; }
+        .footer-about p { color: #9ca3af; margin-top: 1rem; }
+        .footer-grid { display: flex; gap: 4rem; flex-grow: 1; justify-content: flex-end; flex-wrap: wrap; }
+        .footer-col h4 { color: var(--theme-white); margin-bottom: 1.5rem; font-size: 1rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 0.75rem; }
+        .footer-col a { color: #9ca3af; }
+        .footer-col a:hover { color: var(--theme-white); }
+        .footer-bottom { border-top: 1px solid #374151; padding-top: 2rem; text-align: center; }
+
+        /* Manage section */
+        .manage-divider {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 4rem auto;
+            max-width: 700px;
+        }
+
+        .manage-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .manage-header h2 { font-size: 1.75rem; }
+
+        .creds-panel {
+            display: none;
+            background: #fffbeb;
+            border: 1.5px solid #fcd34d;
+            border-radius: 12px;
+            padding: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .creds-panel h4 { font-size: 0.95rem; margin-bottom: 0.25rem; color: #92400e; }
+        .creds-panel p  { font-size: 0.825rem; color: #78350f; margin-bottom: 1rem; }
+
+        .creds-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 0.75rem; align-items: end; }
+
+        .creds-row input {
+            padding: 10px 12px;
+            border: 2px solid #fcd34d;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-family: var(--gg-text-sans);
+            outline: none;
+            background: white;
+        }
+
+        .creds-row input:focus { border-color: #f59e0b; }
+
+        .manage-grid {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .manage-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .manage-card img { width: 100%; height: 140px; object-fit: cover; display: block; }
+
+        .manage-card-footer {
+            padding: 0.6rem 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .manage-caption { font-size: 0.75rem; color: var(--theme-text-gray); flex: 1; line-height: 1.3; }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #9ca3af;
+            padding: 4px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s, background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .delete-btn:hover { color: #ef4444; background: #fef2f2; }
+        .delete-btn svg { width: 18px; height: 18px; }
+
+        .manage-empty {
+            text-align: center;
+            color: var(--theme-text-gray);
+            font-size: 0.95rem;
+            padding: 2rem 0;
+            max-width: 700px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links, .nav-social { display: none; }
+            .burger { display: block; }
+            .form-row { grid-template-columns: 1fr; }
+            .nav-links-mobile {
+                display: flex;
+                position: fixed;
+                right: 0; top: 0;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 70%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+                box-shadow: -2px 0 8px rgba(0,0,0,0.15);
+                gap: 2rem;
+                list-style: none;
+            }
+            .nav-links-mobile.nav-active { transform: translateX(0%); }
+            .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+            .toggle .line2 { opacity: 0; }
+            .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
+            .footer-top, .footer-grid { flex-direction: column; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── PASSWORD GATE ─────────────────────────────────── -->
+    <div id="password-gate">
+        <div class="gate-card">
+            <img src="https://i.ibb.co/Xf4CCb4j/Screenshot-2025-08-30-at-12-40-21-AM.png" alt="STEAMLabs Logo" class="logo-img">
+            <h2>Chapter Leader Portal</h2>
+            <p>Enter the portal password to upload event photos.</p>
+            <div class="gate-input-wrap">
+                <input type="password" id="portal-pw" placeholder="Enter password" autocomplete="off">
+                <button class="toggle-pw" onclick="togglePwVisibility()" type="button" aria-label="Show password">
+                    <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </button>
+            </div>
+            <p class="gate-error" id="gate-error">Incorrect password. Please try again.</p>
+            <button class="btn" style="width:100%" onclick="checkPassword()">Access Portal</button>
+        </div>
+    </div>
+
+    <!-- ── PORTAL CONTENT ────────────────────────────────── -->
+    <div id="portal-content">
+        <header>
+            <nav>
+                <div class="logo">
+                    <a href="index.html" aria-label="STEAMLabs Home">
+                        <img src="https://i.ibb.co/Xf4CCb4j/Screenshot-2025-08-30-at-12-40-21-AM.png" alt="STEAMLabs Logo" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="Impact.html">Impact</a></li>
+                    <li><a href="members.html">Our Team</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+                <div class="nav-social">
+                    <a href="https://www.instagram.com/steamlabs_official" target="_blank" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.644-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <section class="section-bg-light">
+                <div class="container">
+                    <div style="text-align:center; max-width:600px; margin:0 auto 3rem;">
+                        <h1>Upload Event Photos</h1>
+                        <p>Fill in your event details, then upload your photos. They'll appear in the gallery automatically.</p>
+                    </div>
+
+                    <div class="upload-card">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="chapter-city">Chapter / City *</label>
+                                <input type="text" id="chapter-city" placeholder="e.g. Houston" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="event-date">Event Date</label>
+                                <input type="date" id="event-date">
+                            </div>
+                            <div class="form-group full">
+                                <label for="event-location">Event / Location Name *</label>
+                                <input type="text" id="event-location" placeholder="e.g. Notting Park Elementary School">
+                            </div>
+                        </div>
+
+                        <button class="btn upload-trigger" id="upload-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                            </svg>
+                            Choose & Upload Photos
+                        </button>
+                        <p class="form-hint">Supports JPG, PNG, HEIC &mdash; multiple files at once, up to 10 MB each.</p>
+                    </div>
+
+                    <!-- Results appear here after upload -->
+                    <div id="results-section">
+                        <div class="success-banner">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <p id="success-msg">Photos uploaded successfully! They'll appear in the gallery shortly.</p>
+                        </div>
+
+                        <div class="preview-grid" id="preview-grid"></div>
+
+                        <div class="export-box">
+                            <h4>Gallery entries (send these to the admin if photos don't appear automatically)</h4>
+                            <pre id="json-export"></pre>
+                            <div class="export-actions">
+                                <button class="btn" onclick="copyJson()">Copy Entries</button>
+                                <button class="btn btn-outline" onclick="emailAdmin()">Email to Admin</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- How it works -->
+                    <div class="steps-section" style="margin-top: 3.5rem;">
+                        <h3>How it works</h3>
+                        <ul class="steps-list">
+                            <li>
+                                <div class="step-num">1</div>
+                                <div class="step-text">
+                                    <strong>Enter your event details</strong>
+                                    <span>Your city name and the specific venue or school name.</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="step-num">2</div>
+                                <div class="step-text">
+                                    <strong>Upload your photos</strong>
+                                    <span>Drag and drop or select multiple photos at once. HEIC from iPhone is supported.</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="step-num">3</div>
+                                <div class="step-text">
+                                    <strong>Done &mdash; photos go live</strong>
+                                    <span>Photos are uploaded to our cloud storage and appear in the gallery automatically.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ── MANAGE PHOTOS ──────────────────────────── -->
+                <hr class="manage-divider">
+
+                <div class="manage-header">
+                    <h2>Manage Photos</h2>
+                    <p>View and delete photos from the gallery.</p>
+                    <button class="btn" id="load-manage-btn">Load Gallery Photos</button>
+                </div>
+
+                <div class="creds-panel" id="creds-panel">
+                    <h4>Enter your Cloudinary API credentials to enable deletion</h4>
+                    <p>Find these in Cloudinary → Settings → API Keys. They're only held in memory for this session.</p>
+                    <div class="creds-row">
+                        <input type="text"     id="cred-api-key"    placeholder="API Key">
+                        <input type="password" id="cred-api-secret" placeholder="API Secret">
+                        <button class="btn" id="save-creds-btn">Unlock</button>
+                    </div>
+                </div>
+
+                <p class="manage-empty" id="manage-empty">No photos found in the gallery yet.</p>
+
+                <div class="manage-grid" id="manage-grid"></div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <div class="footer-top">
+                    <div class="footer-about">
+                        <a href="index.html">
+                            <img src="https://i.ibb.co/Xf4CCb4j/Screenshot-2025-08-30-at-12-40-21-AM.png" alt="STEAMLabs Logo" class="logo-img">
+                        </a>
+                        <p>STEAMLabs is a not-for-profit organization. <a href="index.html#donate">Donate today!</a></p>
+                    </div>
+                    <div class="footer-grid">
+                        <div class="footer-col">
+                            <h4>About</h4>
+                            <ul>
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="members.html">Our Team</a></li>
+                                <li><a href="Impact.html">Our Impact</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Contact Us</h4>
+                            <ul>
+                                <li><a href="mailto:steamlabsintl@gmail.com">steamlabsintl@gmail.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 STEAMLabs. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const PORTAL_PASSWORD = 'steamlabs2025';
+        const CLOUD_NAME      = 'dpv1rvbp6';
+        const UPLOAD_PRESET   = 'steamlabs-events';
+        const ADMIN_EMAIL     = 'steamlabsintl@gmail.com';
+
+        let uploadedPhotos = [];
+
+        document.getElementById('portal-pw').addEventListener('keydown', e => {
+            if (e.key === 'Enter') checkPassword();
+        });
+
+        function checkPassword() {
+            const val = document.getElementById('portal-pw').value;
+            if (val === PORTAL_PASSWORD) {
+                document.getElementById('password-gate').style.display = 'none';
+                document.getElementById('portal-content').style.display = 'block';
+            } else {
+                document.getElementById('gate-error').style.display = 'block';
+                document.getElementById('portal-pw').value = '';
+                document.getElementById('portal-pw').focus();
+            }
+        }
+
+        function togglePwVisibility() {
+            const input = document.getElementById('portal-pw');
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        document.getElementById('upload-btn').addEventListener('click', () => {
+            const city     = document.getElementById('chapter-city').value.trim();
+            const location = document.getElementById('event-location').value.trim();
+
+            if (!city || !location) {
+                alert('Please fill in Chapter/City and Event/Location before uploading.');
+                return;
+            }
+
+            if (CLOUD_NAME === 'YOUR_CLOUD_NAME') {
+                alert('Cloudinary is not configured yet. Ask your admin to complete the setup.');
+                return;
+            }
+
+            uploadedPhotos = [];
+
+            const slug     = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+            const folder   = `steamlabs/${slug(city)}/${slug(location)}`;
+            const caption  = `${city}, ${location}`;
+
+            const widget = cloudinary.createUploadWidget({
+                cloudName:    CLOUD_NAME,
+                uploadPreset: UPLOAD_PRESET,
+                multiple:     true,
+                folder:       folder,
+                tags:         ['steamlabs-gallery'],
+                sources:      ['local', 'camera'],
+                maxFileSize:  10000000,
+                clientAllowedFormats: ['jpg', 'jpeg', 'png', 'webp', 'heic', 'heif'],
+                styles: {
+                    palette: {
+                        window:          '#FFFFFF',
+                        windowBorder:    '#E5E7EB',
+                        tabIcon:         '#000000',
+                        menuIcons:       '#6B7280',
+                        textDark:        '#1F2937',
+                        textLight:       '#FFFFFF',
+                        link:            '#000000',
+                        action:          '#000000',
+                        inactiveTabIcon: '#9CA3AF',
+                        error:           '#EF4444',
+                        inProgress:      '#000000',
+                        complete:        '#10B981',
+                        sourceBg:        '#F9FAFB'
+                    }
+                }
+            }, (error, result) => {
+                if (error) return;
+
+                if (result.event === 'success') {
+                    const entry = {
+                        url:     result.info.secure_url,
+                        alt:     `STEAMLabs event at ${location}`,
+                        caption: caption
+                    };
+                    uploadedPhotos.push(entry);
+                    addPreviewCard(entry);
+                }
+
+                if (result.event === 'queues-end' && uploadedPhotos.length > 0) {
+                    showResults(uploadedPhotos);
+                }
+            });
+
+            widget.open();
+        });
+
+        function addPreviewCard(photo) {
+            const grid = document.getElementById('preview-grid');
+            const card = document.createElement('div');
+            card.className = 'preview-item';
+            card.innerHTML = `
+                <img src="${photo.url}" alt="${photo.alt}" loading="lazy">
+                <div class="preview-item-caption">${photo.caption}</div>
+            `;
+            grid.appendChild(card);
+        }
+
+        function showResults(photos) {
+            const section = document.getElementById('results-section');
+            section.style.display = 'block';
+
+            const count = photos.length;
+            document.getElementById('success-msg').textContent =
+                `${count} photo${count !== 1 ? 's' : ''} uploaded successfully! They'll appear in the gallery shortly.`;
+
+            document.getElementById('json-export').textContent =
+                JSON.stringify(photos, null, 2);
+
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function copyJson() {
+            const text = document.getElementById('json-export').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const orig = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = orig, 2000);
+            });
+        }
+
+        function emailAdmin() {
+            const json   = document.getElementById('json-export').textContent;
+            const count  = uploadedPhotos.length;
+            const city   = document.getElementById('chapter-city').value.trim();
+            const loc    = document.getElementById('event-location').value.trim();
+            const subject = encodeURIComponent(`[STEAMLabs Gallery] ${count} new photo${count !== 1 ? 's' : ''} from ${city} — ${loc}`);
+            const body    = encodeURIComponent(
+                `Hi,\n\nI just uploaded ${count} photo${count !== 1 ? 's' : ''} from ${city}, ${loc} to the gallery portal.\n\nHere are the gallery entries to add to gallery-images.json:\n\n${json}\n\nThank you!`
+            );
+            window.location.href = `mailto:${ADMIN_EMAIL}?subject=${subject}&body=${body}`;
+        }
+
+        let apiKey = '';
+        let apiSecret = '';
+        let pendingDeletePublicId = null;
+        let pendingDeleteCard = null;
+
+        document.getElementById('load-manage-btn').addEventListener('click', loadManagePhotos);
+
+        document.getElementById('save-creds-btn').addEventListener('click', () => {
+            apiKey    = document.getElementById('cred-api-key').value.trim();
+            apiSecret = document.getElementById('cred-api-secret').value.trim();
+            if (apiKey && apiSecret) {
+                document.getElementById('creds-panel').style.display = 'none';
+                if (pendingDeletePublicId) {
+                    executeDelete(pendingDeletePublicId, pendingDeleteCard);
+                    pendingDeletePublicId = null;
+                    pendingDeleteCard = null;
+                }
+            }
+        });
+
+        async function loadManagePhotos() {
+            const btn = document.getElementById('load-manage-btn');
+            btn.textContent = 'Loading…';
+            btn.disabled = true;
+
+            try {
+                const resp = await fetch(
+                    `https://res.cloudinary.com/${CLOUD_NAME}/image/list/steamlabs-gallery.json`
+                );
+                const data = await resp.json();
+                renderManageGrid(data.resources || []);
+            } catch (e) {
+                alert('Could not load photos. Check that Resource List is enabled in Cloudinary settings.');
+            } finally {
+                btn.textContent = 'Refresh';
+                btn.disabled = false;
+            }
+        }
+
+        function renderManageGrid(resources) {
+            const grid  = document.getElementById('manage-grid');
+            const empty = document.getElementById('manage-empty');
+            grid.innerHTML = '';
+
+            if (resources.length === 0) {
+                empty.style.display = 'block';
+                grid.style.display  = 'none';
+                return;
+            }
+
+            empty.style.display = 'none';
+            grid.style.display  = 'grid';
+
+            const toTitle = s => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+
+            resources.forEach(r => {
+                const parts   = r.public_id.split('/');
+                const city    = parts[1] ? toTitle(parts[1]) : '';
+                const loc     = parts[2] ? toTitle(parts[2]) : '';
+                const caption = [city, loc].filter(Boolean).join(', ') || 'STEAMLabs Event';
+                const thumb   = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/w_300,c_fill,g_auto/${r.public_id}.${r.format}`;
+
+                const card = document.createElement('div');
+                card.className = 'manage-card';
+                card.dataset.publicId = r.public_id;
+                card.innerHTML = `
+                    <img src="${thumb}" alt="${caption}" loading="lazy">
+                    <div class="manage-card-footer">
+                        <span class="manage-caption">${caption}</span>
+                        <button class="delete-btn" title="Delete photo" aria-label="Delete ${caption}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                card.querySelector('.delete-btn').addEventListener('click', () => handleDelete(r.public_id, card));
+                grid.appendChild(card);
+            });
+        }
+
+        async function handleDelete(publicId, card) {
+            if (!confirm('Permanently delete this photo from the gallery?')) return;
+
+            if (!apiKey || !apiSecret) {
+                pendingDeletePublicId = publicId;
+                pendingDeleteCard     = card;
+                document.getElementById('creds-panel').style.display = 'block';
+                document.getElementById('creds-panel').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            executeDelete(publicId, card);
+        }
+
+        async function executeDelete(publicId, card) {
+            const btn = card.querySelector('.delete-btn');
+            btn.disabled = true;
+            btn.style.opacity = '0.4';
+
+            try {
+                const timestamp     = Math.round(Date.now() / 1000);
+                const stringToSign  = `public_id=${publicId}&timestamp=${timestamp}${apiSecret}`;
+                const signature     = await sha1(stringToSign);
+
+                const body = new FormData();
+                body.append('public_id', publicId);
+                body.append('timestamp', timestamp);
+                body.append('api_key',   apiKey);
+                body.append('signature', signature);
+
+                const resp   = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/destroy`, {
+                    method: 'POST',
+                    body
+                });
+                const result = await resp.json();
+
+                if (result.result === 'ok') {
+                    card.style.transition = 'opacity 0.3s';
+                    card.style.opacity    = '0';
+                    setTimeout(() => card.remove(), 300);
+                } else {
+                    alert('Delete failed — check your API Key and Secret and try again.');
+                    apiKey = '';
+                    apiSecret = '';
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                }
+            } catch (e) {
+                alert('Delete failed: ' + e.message);
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            }
+        }
+
+        async function sha1(message) {
+            const buf  = new TextEncoder().encode(message);
+            const hash = await crypto.subtle.digest('SHA-1', buf);
+            return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const burger = document.querySelector('.burger');
+            const headerEl = document.querySelector('header');
+            burger.addEventListener('click', () => {
+                burger.classList.toggle('toggle');
+                let nav = document.querySelector('.nav-links-mobile');
+                if (nav) {
+                    nav.remove();
+                } else {
+                    nav = document.createElement('ul');
+                    nav.className = 'nav-links-mobile';
+                    nav.innerHTML = `
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="Impact.html">Impact</a></li>
+                        <li><a href="members.html">Our Team</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    `;
+                    headerEl.appendChild(nav);
+                    setTimeout(() => nav.classList.add('nav-active'), 10);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

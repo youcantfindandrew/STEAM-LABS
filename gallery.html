@@ -26,7 +26,6 @@
             --gg-text-sans: 'Lato', sans-serif;
         }
 
-        /* Basic Reset & Typography */
         * {
             margin: 0;
             padding: 0;
@@ -93,7 +92,6 @@
             margin: 0 auto 4rem auto;
         }
 
-        /* Buttons */
         .btn {
             display: inline-block;
             padding: 12px 28px;
@@ -118,7 +116,6 @@
             color: var(--theme-white);
         }
 
-        /* Header & Navigation */
         header {
             background-color: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
@@ -205,7 +202,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Section Styling (General) */
         section {
             padding: 6rem 0;
             width: 100%;
@@ -215,7 +211,6 @@
             background-color: var(--theme-light-bg);
         }
 
-        /* Gallery Section Specific Styles */
         .gallery-grid {
             column-count: 3;
             column-gap: 1.5rem;
@@ -228,10 +223,8 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: inline-block;
-            /* Fix for column-break issue */
+            display: inline-block; /* prevents items from breaking across columns */
             width: 100%;
-            /* Fix for column-break issue */
         }
 
         .gallery-item:hover {
@@ -270,7 +263,6 @@
             font-weight: 600;
         }
 
-        /* Footer */
         footer {
             background-color: var(--theme-dark-bg);
             color: #9ca3af;
@@ -335,7 +327,6 @@
             text-align: center;
         }
 
-        /* Responsive */
         @media (max-width: 992px) {
             .gallery-grid {
                 column-count: 2;
@@ -444,49 +435,8 @@
                     <p>A collection of moments from our workshops, events, and community engagements.</p>
                 </div>
                 <div id="gallery-grid" class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="https://i.ibb.co/PvFw5WTR/Houston-Notting-Park-1.jpg" alt="STEAMLabs workshop at Houston Notting Park" loading="lazy" decoding="async">
-                        <div class="gallery-item-info"><p>Houston, Notting Park</p></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://i.ibb.co/93pd2SQZ/Glow-in-the-dark-personal-5.jpg" alt="Glow in the dark personal project display" loading="lazy" decoding="async">
-                        <div class="gallery-item-info"><p>Personal Project</p></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://i.ibb.co/CK5W7gwz/Glow-in-the-dark-personal-4.jpg" alt="Glow in the dark personal project artwork" loading="lazy" decoding="async">
-                        <div class="gallery-item-info"><p>Personal Project</p></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://i.ibb.co/Rpj8Xw6W/Katy-The-Learning-Experience-Katy-Mills-2.jpg" alt="STEAMLabs session at The Learning Experience Katy Mills" loading="lazy" decoding="async">
-                        <div class="gallery-item-info"><p>Katy, The Learning Experience Katy Mills</p></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://i.ibb.co/GvVcXDD6/Portland-Rivergrove-Elementary-School.jpg" alt="Workshop at Portland Rivergrove Elementary School" loading="lazy" decoding="async">
-                        <div class="gallery-item-info"><p>Portland, Rivergrove Elementary School</p></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://i.ibb.co/YBBLjpNG/Portland-Rockcreek-Elementary-School-2.jpg" alt="Session at Portland Rockcreek Elementary School" loading="lazy" decoding="async">
-                        <div class="gallery-item-info"><p>Portland, Rockcreek Elementary School</p></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://i.ibb.co/SqNXJwj/San-Diego-CA-Pacific-Highlands-Ranch-Library-2.jpg" alt="Event at San Diego Pacific Highlands Ranch Library" loading="lazy" decoding="async">
-                        <div class="gallery-item-info"><p>San Diego, Pacific Highlands Ranch Library</p></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://i.ibb.co/j9JtMYg4/San-Diego-CA-Pacific-Highlands-Ranch-Library-1.jpg" alt="Workshop at San Diego Pacific Highlands Ranch Library" loading="lazy" decoding="async">
-                        <div class="gallery-item-info"><p>San Diego, Pacific Highlands Ranch Library</p></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://i.ibb.co/ntmW7DV/San-Diego-CA-Pacific-Highlands-Ranch-Library.jpg" alt="Students at San Diego Pacific Highlands Ranch Library" loading="lazy" decoding="async">
-                        <div class="gallery-item-info"><p>San Diego, Pacific Highlands Ranch Library</p></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://i.ibb.co/C59R02HN/Sugarland-TX-The-Learning-Experience-Spring-Branch-1.jpg" alt="STEAMLabs at The Learning Experience Spring Branch in Sugarland" loading="lazy" decoding="async">
-                        <div class="gallery-item-info"><p>Sugarland, The Learning Experience Spring Branch</p></div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://i.ibb.co/tPNwGdfj/Sugarland-TX-The-Learning-Experience-Spring-Branch.jpg" alt="Workshop at The Learning Experience Spring Branch in Sugarland" loading="lazy" decoding="async">
-                        <div class="gallery-item-info"><p>Sugarland, The Learning Experience Spring Branch</p></div>
+                    <div id="gallery-loading" style="column-span:all; text-align:center; padding:3rem 0; color:#9ca3af; font-family:'Montserrat',sans-serif; font-size:0.95rem; letter-spacing:1px;">
+                        Loading photos&hellip;
                     </div>
                 </div>
             </div>
@@ -517,6 +467,7 @@
                         <ul>
                             <li><a href="gallery.html">Gallery</a></li>
                             <li><a href="index.html#get-involved">Get Involved</a></li>
+                            <li><a href="upload.html">Chapter Portal</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">
@@ -545,9 +496,11 @@
     </footer>
 
     <script>
+        // Must match CLOUD_NAME in upload.html
+        const CLOUD_NAME = 'dpv1rvbp6';
+
         document.addEventListener('DOMContentLoaded', () => {
 
-            // Mobile Nav
             const burger = document.querySelector('.burger');
             const navLinksContainer = document.querySelector('header');
             burger.addEventListener('click', () => {
@@ -570,7 +523,64 @@
                     setTimeout(() => nav.classList.add('nav-active'), 10);
                 }
             });
+
+            loadGallery();
         });
+
+        function makeGalleryItem(photo) {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `
+                <img src="${photo.url}" alt="${photo.alt}" loading="lazy" decoding="async">
+                <div class="gallery-item-info"><p>${photo.caption}</p></div>
+            `;
+            return item;
+        }
+
+        async function loadGallery() {
+            const grid    = document.getElementById('gallery-grid');
+            const spinner = document.getElementById('gallery-loading');
+
+            let photos = [];
+
+            try {
+                const resp = await fetch('gallery-images.json');
+                if (resp.ok) photos = await resp.json();
+            } catch (_) {}
+
+            if (CLOUD_NAME !== 'YOUR_CLOUD_NAME') {
+                try {
+                    const resp = await fetch(
+                        `https://res.cloudinary.com/${CLOUD_NAME}/image/list/steamlabs-gallery.json`
+                    );
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        const toTitle = s => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+
+                        for (const r of (data.resources || [])) {
+                            const parts   = r.public_id.split('/');
+                            const city    = parts[1] ? toTitle(parts[1]) : '';
+                            const loc     = parts[2] ? toTitle(parts[2]) : '';
+                            const caption = city && loc ? `${city}, ${loc}` : 'STEAMLabs Event';
+                            photos.push({
+                                url:     `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${r.public_id}.${r.format}`,
+                                alt:     `STEAMLabs event${loc ? ' at ' + loc : ''}`,
+                                caption: caption
+                            });
+                        }
+                    }
+                } catch (_) {}
+            }
+
+            spinner.remove();
+
+            if (photos.length === 0) {
+                grid.innerHTML = '<p style="text-align:center;color:#9ca3af;padding:3rem 0;">No photos yet.</p>';
+                return;
+            }
+
+            photos.forEach(p => grid.appendChild(makeGalleryItem(p)));
+        }
     </script>
 </body>
 

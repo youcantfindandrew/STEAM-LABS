@@ -10,8 +10,9 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
   return {
     server: {
-      port: 3000,
+      port: 5174,
       host: '0.0.0.0',
+      hmr: { overlay: false },
     },
     plugins: [react()],
     define: {
@@ -33,6 +34,7 @@ export default defineConfig(({ mode }) => {
           gallery: path.resolve(__dirname, 'gallery.html'),
           impact: path.resolve(__dirname, 'Impact.html'),
           members: path.resolve(__dirname, 'members.html'),
+          upload: path.resolve(__dirname, 'upload.html'),
         },
       },
     },
