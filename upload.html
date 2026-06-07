@@ -493,6 +493,55 @@
         .delete-btn-owned { color: #16a34a; }
         .delete-btn-owned:hover { color: #15803d; background: #dcfce7; }
 
+        .delete-confirm-row {
+            display: flex;
+            gap: 0.4rem;
+            padding: 0.5rem 0.75rem;
+            background: #fff8f8;
+            border-top: 1px solid #fecaca;
+            align-items: center;
+        }
+
+        .delete-confirm-row input {
+            flex: 1;
+            padding: 5px 8px;
+            border: 1.5px solid #fca5a5;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-family: var(--gg-text-sans);
+            outline: none;
+            min-width: 0;
+        }
+
+        .delete-confirm-row input:focus { border-color: #ef4444; }
+
+        .delete-confirm-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: var(--gg-text-heading);
+            white-space: nowrap;
+        }
+
+        .delete-confirm-btn:hover { background: #dc2626; }
+
+        .delete-cancel-btn {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 2px 4px;
+            line-height: 1;
+        }
+
+        .delete-cancel-btn:hover { color: #374151; }
+
         .owned-badge {
             display: inline-block;
             background: #dcfce7;
@@ -750,6 +799,13 @@
 
         let uploadedPhotos = [];
 
+        // migrate: remove any stale entries that were saved without a publicId key
+        (function migrateOwnedStorage() {
+            const owned = JSON.parse(localStorage.getItem('steamlabs_owned') || '[]');
+            const clean = owned.filter(o => o && o.publicId);
+            if (clean.length !== owned.length) localStorage.setItem('steamlabs_owned', JSON.stringify(clean));
+        })();
+
         document.getElementById('portal-pw').addEventListener('keydown', e => {
             if (e.key === 'Enter') checkPassword();
         });
@@ -792,14 +848,15 @@
             const caption  = `${city}, ${location}`;
 
             const widget = cloudinary.createUploadWidget({
-                cloudName:    CLOUD_NAME,
-                uploadPreset: UPLOAD_PRESET,
-                multiple:     true,
-                folder:       folder,
-                tags:         ['steamlabs-gallery'],
-                sources:      ['local', 'camera'],
-                maxFileSize:  10000000,
+                cloudName:          CLOUD_NAME,
+                uploadPreset:       UPLOAD_PRESET,
+                multiple:           true,
+                folder:             folder,
+                tags:               ['steamlabs-gallery'],
+                sources:            ['local', 'camera'],
+                maxFileSize:        10000000,
                 clientAllowedFormats: ['jpg', 'jpeg', 'png', 'webp', 'heic', 'heif'],
+                return_delete_token: true,
                 styles: {
                     palette: {
                         window:          '#FFFFFF',
@@ -953,8 +1010,8 @@
                 const loc         = parts[2] ? toTitle(parts[2]) : '';
                 const caption     = [city, loc].filter(Boolean).join(', ') || 'STEAMLabs Event';
                 const thumb       = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/w_300,c_fill,g_auto/${r.public_id}.${r.format}`;
-                const deleteToken = ownedMap.get(r.public_id);
-                const isOwned     = deleteToken != null;
+                const isOwned     = ownedMap.has(r.public_id);
+                const deleteToken = isOwned ? ownedMap.get(r.public_id) : null;
 
                 const card = document.createElement('div');
                 card.className = 'manage-card';
@@ -972,7 +1029,7 @@
                 `;
                 const deleteBtn = card.querySelector('.delete-btn');
                 if (isOwned) {
-                    deleteBtn.addEventListener('click', () => handleOwnedDelete(deleteToken, r.public_id, card));
+                    deleteBtn.addEventListener('click', () => showOwnedDeleteConfirm(deleteToken, r.public_id, card));
                 } else {
                     deleteBtn.addEventListener('click', () => handleDelete(r.public_id, card));
                 }
@@ -980,12 +1037,62 @@
             });
         }
 
-        async function handleOwnedDelete(deleteToken, publicId, card) {
-            if (!confirm('Permanently delete this photo from the gallery?')) return;
+        function showOwnedDeleteConfirm(deleteToken, publicId, card) {
+            // toggle: clicking again collapses the row
+            const existing = card.querySelector('.delete-confirm-row');
+            if (existing) { existing.remove(); return; }
 
-            const pw = prompt('Enter your delete password:');
-            if (pw !== 'deletepls') {
-                alert('Incorrect password.');
+            const row = document.createElement('div');
+            row.className = 'delete-confirm-row';
+            row.innerHTML = `
+                <input type="password" placeholder='Type "deletepls" to confirm' maxlength="30">
+                <button class="delete-confirm-btn">Delete</button>
+                <button class="delete-cancel-btn" title="Cancel">✕</button>
+            `;
+            card.appendChild(row);
+            row.querySelector('input').focus();
+
+            row.querySelector('.delete-cancel-btn').addEventListener('click', () => row.remove());
+
+            const submit = () => {
+                const pw = row.querySelector('input').value;
+                if (pw !== 'deletepls') {
+                    const input = row.querySelector('input');
+                    input.style.borderColor = '#ef4444';
+                    input.value = '';
+                    input.placeholder = 'Incorrect — try again';
+                    input.focus();
+                    return;
+                }
+                row.remove();
+                handleOwnedDelete(deleteToken, publicId, card);
+            };
+
+            row.querySelector('.delete-confirm-btn').addEventListener('click', submit);
+            row.querySelector('input').addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+        }
+
+        async function handleOwnedDelete(deleteToken, publicId, card) {
+            if (!deleteToken) {
+                // No delete token — image was uploaded before token support was enabled.
+                // If admin credentials are present use them; otherwise prompt for them.
+                pendingDeletePublicId = publicId;
+                pendingDeleteCard     = card;
+                if (apiKey && apiSecret) {
+                    executeDelete(publicId, card);
+                } else {
+                    const panel = document.getElementById('creds-panel');
+                    panel.style.display = 'block';
+                    panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    const notice = panel.querySelector('.creds-notice') || (() => {
+                        const el = document.createElement('p');
+                        el.className = 'creds-notice';
+                        el.style.cssText = 'color:#ef4444;font-size:.85rem;margin-bottom:.75rem;';
+                        el.textContent = 'This photo was uploaded before self-delete was enabled. Enter admin credentials below to delete it, or re-upload the photo and delete the new copy.';
+                        panel.insertBefore(el, panel.firstChild);
+                        return el;
+                    })();
+                }
                 return;
             }
 
@@ -1014,7 +1121,6 @@
                         owned.filter(o => o.publicId !== publicId)
                     ));
                 } else {
-                    // delete_token expires after ~10 min; admin must remove if stale
                     alert('Delete failed — your delete token may have expired. Contact an admin to remove this photo.');
                     btn.disabled = false;
                     btn.style.opacity = '1';
