@@ -65,7 +65,7 @@
         }
 
         p {
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
             font-size: 1.05rem;
             color: var(--theme-text-gray);
         }
@@ -89,7 +89,7 @@
         .section-title {
             text-align: center;
             max-width: 700px;
-            margin: 0 auto 4rem auto;
+            margin: 0 auto 0.75rem auto;
         }
 
         .btn {
@@ -203,7 +203,7 @@
         }
 
         section {
-            padding: 6rem 0;
+            padding: 1.5rem 0;
             width: 100%;
         }
 
@@ -213,23 +213,19 @@
 
         .gallery-grid {
             column-count: 3;
-            column-gap: 1.5rem;
+            column-gap: 4px;
         }
 
         .gallery-item {
             position: relative;
-            margin-bottom: 1.5rem;
-            border-radius: 12px;
+            margin-bottom: 4px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: inline-block; /* prevents items from breaking across columns */
+            display: inline-block;
             width: 100%;
         }
 
         .gallery-item:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transform: scale(1.02);
         }
 
         .gallery-item img {
@@ -327,7 +323,7 @@
             text-align: center;
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
             .gallery-grid {
                 column-count: 2;
             }
@@ -335,7 +331,7 @@
 
         @media (max-width: 768px) {
             section {
-                padding: 4rem 0;
+                padding: 2rem 0;
             }
 
             .nav-links,
@@ -391,6 +387,40 @@
                 column-count: 1;
             }
         }
+
+
+        .location-filter {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .location-filter button {
+            padding: 0.5rem 1.35rem;
+            border: 2px solid #e5e7eb;
+            background: #fff;
+            border-radius: 50px;
+            font-family: var(--gg-text-sans);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--theme-text-gray);
+            cursor: pointer;
+            transition: border-color 0.15s, background 0.15s, color 0.15s;
+            white-space: nowrap;
+        }
+
+        .location-filter button:hover {
+            border-color: var(--theme-text-dark);
+            color: var(--theme-text-dark);
+        }
+
+        .location-filter button.active {
+            background: var(--theme-text-dark);
+            border-color: var(--theme-text-dark);
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -434,10 +464,11 @@
                     <h1>Our Gallery</h1>
                     <p>A collection of moments from our workshops, events, and community engagements.</p>
                 </div>
-                <div id="gallery-grid" class="gallery-grid">
-                    <div id="gallery-loading" style="column-span:all; text-align:center; padding:3rem 0; color:#9ca3af; font-family:'Montserrat',sans-serif; font-size:0.95rem; letter-spacing:1px;">
-                        Loading photos&hellip;
-                    </div>
+                <div id="location-filter" class="location-filter"></div>
+            </div>
+            <div id="gallery-container">
+                <div id="gallery-loading" style="text-align:center; padding:3rem 0; color:#9ca3af; font-family:'Montserrat',sans-serif; font-size:0.95rem; letter-spacing:1px;">
+                    Loading photos&hellip;
                 </div>
             </div>
         </section>
@@ -496,11 +527,9 @@
     </footer>
 
     <script>
-        // Must match CLOUD_NAME in upload.html
         const CLOUD_NAME = 'dpv1rvbp6';
 
         document.addEventListener('DOMContentLoaded', () => {
-
             const burger = document.querySelector('.burger');
             const navLinksContainer = document.querySelector('header');
             burger.addEventListener('click', () => {
@@ -527,6 +556,13 @@
             loadGallery();
         });
 
+        const toSlug    = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        const toTitle   = s => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        const cityOfCaption = caption => {
+            const idx = caption.indexOf(',');
+            return idx !== -1 ? caption.slice(0, idx).trim() : null;
+        };
+
         function makeGalleryItem(photo) {
             const item = document.createElement('div');
             item.className = 'gallery-item';
@@ -538,14 +574,30 @@
         }
 
         async function loadGallery() {
-            const grid    = document.getElementById('gallery-grid');
-            const spinner = document.getElementById('gallery-loading');
+            const container = document.getElementById('gallery-container');
+            const spinner   = document.getElementById('gallery-loading');
 
-            let photos = [];
+            // citySlug -> { displayName, photos[] }
+            const sections = new Map();
+
+            function addPhoto(cityRaw, photo) {
+                const key = cityRaw ? toSlug(cityRaw) : 'other';
+                if (!sections.has(key)) {
+                    sections.set(key, {
+                        displayName: cityRaw ? toTitle(toSlug(cityRaw)) : 'Other',
+                        photos: []
+                    });
+                }
+                sections.get(key).photos.push(photo);
+            }
 
             try {
                 const resp = await fetch('gallery-images.json');
-                if (resp.ok) photos = await resp.json();
+                if (resp.ok) {
+                    for (const p of await resp.json()) {
+                        addPhoto(cityOfCaption(p.caption), p);
+                    }
+                }
             } catch (_) {}
 
             if (CLOUD_NAME !== 'YOUR_CLOUD_NAME') {
@@ -555,14 +607,12 @@
                     );
                     if (resp.ok) {
                         const data = await resp.json();
-                        const toTitle = s => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-
                         for (const r of (data.resources || [])) {
-                            const parts   = r.public_id.split('/');
-                            const city    = parts[1] ? toTitle(parts[1]) : '';
-                            const loc     = parts[2] ? toTitle(parts[2]) : '';
-                            const caption = city && loc ? `${city}, ${loc}` : 'STEAMLabs Event';
-                            photos.push({
+                            const parts      = r.public_id.split('/');
+                            const cityRaw    = parts[1] ? toTitle(parts[1]) : null;
+                            const loc        = parts[2] ? toTitle(parts[2]) : '';
+                            const caption    = cityRaw && loc ? `${cityRaw}, ${loc}` : 'STEAMLabs Event';
+                            addPhoto(cityRaw, {
                                 url:     `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${r.public_id}.${r.format}`,
                                 alt:     `STEAMLabs event${loc ? ' at ' + loc : ''}`,
                                 caption: caption
@@ -574,12 +624,60 @@
 
             spinner.remove();
 
-            if (photos.length === 0) {
-                grid.innerHTML = '<p style="text-align:center;color:#9ca3af;padding:3rem 0;">No photos yet.</p>';
+            if (sections.size === 0) {
+                container.innerHTML = '<p style="text-align:center;color:#9ca3af;padding:3rem 0;">No photos yet.</p>';
                 return;
             }
 
-            photos.forEach(p => grid.appendChild(makeGalleryItem(p)));
+            // Alphabetical order; "other" always last
+            const sorted = [...sections.entries()].sort(([a], [b]) => {
+                if (a === 'other') return 1;
+                if (b === 'other') return -1;
+                return a.localeCompare(b);
+            });
+
+            const totalPhotos = [...sections.values()].reduce((n, s) => n + s.photos.length, 0);
+
+            // Populate centered filter bar
+            const filterBar = document.getElementById('location-filter');
+
+            const allBtn = document.createElement('button');
+            allBtn.className = 'active';
+            allBtn.dataset.filter = 'all';
+            allBtn.textContent = 'All';
+            filterBar.appendChild(allBtn);
+
+            for (const [key, section] of sorted) {
+                const btn = document.createElement('button');
+                btn.dataset.filter = key;
+                btn.textContent = section.displayName;
+                filterBar.appendChild(btn);
+            }
+
+            filterBar.addEventListener('click', e => {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                filterBar.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                document.querySelectorAll('.gallery-item').forEach(card => {
+                    card.style.display = filter === 'all' || card.dataset.city === filter ? '' : 'none';
+                });
+            });
+
+            // Single flat grid — cards carry data-city for filtering
+            const grid = document.createElement('div');
+            grid.className = 'gallery-grid';
+
+            for (const [key, section] of sorted) {
+                for (const photo of section.photos) {
+                    const card = makeGalleryItem(photo);
+                    card.dataset.city = key;
+                    grid.appendChild(card);
+                }
+            }
+
+            container.appendChild(grid);
         }
     </script>
 </body>
