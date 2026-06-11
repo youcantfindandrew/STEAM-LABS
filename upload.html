@@ -904,10 +904,18 @@
             const grid = document.getElementById('preview-grid');
             const card = document.createElement('div');
             card.className = 'preview-item';
-            card.innerHTML = `
-                <img src="${photo.url}" alt="${photo.alt}" loading="lazy">
-                <div class="preview-item-caption">${photo.caption}</div>
-            `;
+
+            const img = document.createElement('img');
+            img.src = photo.url;
+            img.alt = photo.alt;
+            img.loading = 'lazy';
+
+            const cap = document.createElement('div');
+            cap.className = 'preview-item-caption';
+            cap.textContent = photo.caption;
+
+            card.appendChild(img);
+            card.appendChild(cap);
             grid.appendChild(card);
         }
 
