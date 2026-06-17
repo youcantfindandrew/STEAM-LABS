@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STEAMLabs | Gallery</title>
+    <meta name="description" content="Browse photos from STEAMLabs workshops, competitions, and community events — moments from 150+ programs across 12 countries.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -13,17 +14,22 @@
 
     <style>
         :root {
-            --theme-primary-blue: #000000;
-            --theme-primary-blue-darker: #333333;
-            --theme-dark-bg: #000000;
-            --theme-dark-card: #1a1a1a;
-            --theme-text-dark: #1f2937;
+            --theme-primary-blue: #6366f1;
+            --theme-primary-blue-darker: #4f46e5;
+            --theme-dark-bg: #0a0a0a;
+            --theme-dark-card: #141414;
+            --theme-light-bg: #f3f4f6;
+            --theme-white: #ffffff;
+            --theme-text-dark: #111111;
             --theme-text-light: #f9fafb;
             --theme-text-gray: #6b7280;
-            --theme-light-bg: #f9f9f9;
-            --theme-white: #ffffff;
             --gg-text-heading: 'Montserrat', sans-serif;
             --gg-text-sans: 'Lato', sans-serif;
+            --accent: #818cf8;
+            --accent-dark: #6366f1;
+            --amber: #f59e0b;
+            --emerald: #10b981;
+            --rose: #f43f5e;
         }
 
         * {
@@ -421,6 +427,46 @@
             border-color: var(--theme-text-dark);
             color: #fff;
         }
+
+        .cta-band {
+            background: var(--theme-dark-bg);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .cta-band h2 {
+            font-family: var(--gg-text-heading);
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            color: var(--theme-text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-band p {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.55);
+            max-width: 520px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--theme-primary-blue);
+            color: #fff;
+            font-family: var(--gg-text-heading);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.85rem 2.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            letter-spacing: 0.03em;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .cta-btn:hover {
+            background: var(--theme-primary-blue-darker);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 
@@ -437,6 +483,7 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="Impact.html">Impact</a></li>
+                <li><a href="awards.html">Awards</a></li>
                 <li><a href="members.html">Our Team</a></li>
                 <li><a href="gallery.html" class="active">Gallery</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
@@ -470,6 +517,14 @@
                 <div id="gallery-loading" style="text-align:center; padding:3rem 0; color:#9ca3af; font-family:'Montserrat',sans-serif; font-size:0.95rem; letter-spacing:1px;">
                     Loading photos&hellip;
                 </div>
+            </div>
+        </section>
+
+        <section class="cta-band">
+            <div class="container">
+                <h2>Want to be part of the story?</h2>
+                <p>Join one of our 18 chapters and help bring STEM education to students in your community.</p>
+                <a href="contact.html" class="cta-btn">Get Involved</a>
             </div>
         </section>
     </main>
@@ -544,6 +599,7 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="Impact.html">Impact</a></li>
+                        <li><a href="awards.html">Awards</a></li>
                         <li><a href="members.html">Our Team</a></li>
                         <li><a href="gallery.html">Gallery</a></li>
                         <li><a href="contact.html">Contact Us</a></li>

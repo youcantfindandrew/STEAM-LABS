@@ -4,23 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STEAMLabs | Blog</title>
+    <meta name="description" content="Read student-written articles on science, technology, and space from the STEAMLabs team — curiosity-driven writing from young STEM educators.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --theme-primary-blue: #0077ff;
-            --theme-primary-blue-darker: #005fcc;
-            --theme-dark-bg: #000000;
-            --theme-dark-card: #1a1a1a;
-            --theme-text-dark: #1f2937;
-            --theme-text-light: #f9fafb;
-            --theme-text-gray: #6b7280;
+            --theme-primary-blue: #6366f1;
+            --theme-primary-blue-darker: #4f46e5;
+            --theme-dark-bg: #0a0a0a;
+            --theme-dark-card: #141414;
             --theme-light-bg: #f3f4f6;
             --theme-white: #ffffff;
+            --theme-text-dark: #111111;
+            --theme-text-light: #f9fafb;
+            --theme-text-gray: #6b7280;
             --gg-text-heading: 'Montserrat', sans-serif;
             --gg-text-sans: 'Lato', sans-serif;
+            --accent: #818cf8;
+            --accent-dark: #6366f1;
+            --amber: #f59e0b;
+            --emerald: #10b981;
+            --rose: #f43f5e;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -47,8 +53,8 @@
         /* Blog Main Content */
         .blog-content-area { background-color: var(--theme-white); padding: 4rem 0; border-top-left-radius: 40px; border-top-right-radius: 40px; min-height: 80vh; }
         .blog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
-        .all-posts-link { color: #005fcc; font-weight: 600; text-decoration: none; border-bottom: 2px solid transparent; transition: 0.3s; }
-        .all-posts-link:hover { border-bottom-color: #005fcc; }
+        .all-posts-link { color: var(--theme-primary-blue); font-weight: 600; text-decoration: none; border-bottom: 2px solid transparent; transition: 0.3s; }
+        .all-posts-link:hover { border-bottom-color: var(--theme-primary-blue); }
 
         /* Blog Grid */
         .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2.5rem; }
@@ -75,6 +81,13 @@
         .stat-item svg { width: 18px; height: 18px; stroke-width: 1.5; }
         .heart-icon:hover { color: #ff4d4d; }
 
+        /* CTA Band */
+        .cta-band { background: var(--theme-dark-bg); padding: 5rem 0; text-align: center; }
+        .cta-band h2 { font-family: var(--gg-text-heading); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; color: var(--theme-text-light); margin-bottom: 0.75rem; }
+        .cta-band p { font-size: 1.05rem; color: rgba(255,255,255,0.55); max-width: 520px; margin: 0 auto 2rem; }
+        .cta-btn { display: inline-block; background: var(--theme-primary-blue); color: #fff; font-family: var(--gg-text-heading); font-weight: 700; font-size: 0.95rem; padding: 0.85rem 2.2rem; border-radius: 6px; text-decoration: none; letter-spacing: 0.03em; transition: background 0.2s ease, transform 0.2s ease; }
+        .cta-btn:hover { background: var(--theme-primary-blue-darker); transform: translateY(-2px); }
+
         /* Footer */
         footer { background-color: var(--theme-dark-bg); color: #9ca3af; padding: 5rem 0 2rem; font-size: 0.9rem; }
         .footer-bottom { border-top: 1px solid #333; padding-top: 2rem; text-align: center; margin-top: 3rem; }
@@ -98,12 +111,13 @@
         <nav class="container">
             <a href="index.html" class="logo"><img src="https://i.ibb.co/Xf4CCb4j/Screenshot-2025-08-30-at-12-40-21-AM.png" alt="STEAMLabs Logo" class="logo-img"></a>
             <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
-                <li><a href="index.html#get-involved">Get Involved</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="members.html">Our Board</a></li>
                 <li><a href="Impact.html">Impact</a></li>
+                <li><a href="awards.html">Awards</a></li>
+                <li><a href="members.html">Our Team</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
             </ul>
             <div class="burger">
                 <div class="line1"></div>
@@ -127,6 +141,14 @@
             </div>
         </div>
     </main>
+
+    <section class="cta-band">
+        <div class="container">
+            <h2>Curious? So are we.</h2>
+            <p>STEAMLabs runs workshops, events, and programs across 18 chapters. Come find your chapter and get involved.</p>
+            <a href="contact.html" class="cta-btn">Find Your Chapter</a>
+        </div>
+    </section>
 
     <footer>
         <div class="container">
@@ -271,12 +293,13 @@
                     mobileNav = document.createElement('ul');
                     mobileNav.className = 'nav-links-mobile';
                     mobileNav.innerHTML = `
+                        <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Us</a></li>
-                        <li><a href="index.html#get-involved">Get Involved</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="members.html">Our Board</a></li>
                         <li><a href="Impact.html">Impact</a></li>
+                        <li><a href="awards.html">Awards</a></li>
+                        <li><a href="members.html">Our Team</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                     `;
                     navContainer.appendChild(mobileNav);
                     setTimeout(() => mobileNav.classList.add('nav-active'), 10);

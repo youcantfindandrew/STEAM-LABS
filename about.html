@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STEAMLabs | About Us</title>
+    <meta name="description" content="Learn about STEAMLabs — a student-led 501(c)(3) nonprofit on a mission to make STEM accessible to every student, with 18 chapters across 12 countries and 800+ volunteers.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -13,17 +14,22 @@
 
     <style>
         :root {
-            --theme-primary-blue: #ffffff;
-            --theme-primary-blue-darker: #e5e5e5;
+            --theme-primary-blue: #6366f1;
+            --theme-primary-blue-darker: #4f46e5;
             --theme-dark-bg: #0a0a0a;
             --theme-dark-card: #141414;
-            --theme-text-dark: #1f2937;
-            --theme-text-light: #f9fafb;
-            --theme-text-gray: #9ca3af;
-            --theme-light-bg: #f9f9f9;
+            --theme-light-bg: #f3f4f6;
             --theme-white: #ffffff;
+            --theme-text-dark: #111111;
+            --theme-text-light: #f9fafb;
+            --theme-text-gray: #6b7280;
             --gg-text-heading: 'Montserrat', sans-serif;
             --gg-text-sans: 'Lato', sans-serif;
+            --accent: #818cf8;
+            --accent-dark: #6366f1;
+            --amber: #f59e0b;
+            --emerald: #10b981;
+            --rose: #f43f5e;
         }
 
         * {
@@ -347,73 +353,50 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-        .values-grid {
+        .values-list {
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .value-row {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            grid-template-columns: 2.5rem 1fr 2fr;
+            gap: 2.5rem;
+            align-items: start;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            transition: background 0.2s ease, padding 0.2s ease;
         }
 
-        .value-card {
-            background: var(--theme-dark-card);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+        .value-row:hover {
+            background: rgba(255,255,255,0.025);
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+            margin: 0 -1.25rem;
+            border-radius: 10px;
         }
 
-        .value-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: #fff;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .vl-num {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.25);
+            font-family: var(--gg-text-heading);
+            padding-top: 0.3rem;
+            letter-spacing: 0.05em;
         }
 
-        .value-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        .vl-name {
+            font-size: 1.35rem;
+            font-weight: 800;
+            font-family: var(--gg-text-heading);
+            color: var(--theme-text-light);
+            margin: 0;
         }
 
-        .value-card:hover::before {
-            opacity: 1;
-        }
-
-        .value-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .value-card:hover .value-icon {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .value-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .value-card p {
+        .vl-desc {
             font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 0;
+            color: rgba(255,255,255,0.5);
             line-height: 1.7;
+            margin: 0;
         }
 
         /* Story Section */
@@ -585,10 +568,6 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .values-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -610,8 +589,13 @@
                 gap: 3rem;
             }
 
-            .values-grid {
-                grid-template-columns: 1fr;
+            .value-row {
+                grid-template-columns: 2rem 1fr;
+                gap: 1.25rem 1rem;
+            }
+
+            .vl-desc {
+                grid-column: 2 / -1;
             }
 
             .stats-grid {
@@ -687,6 +671,7 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html" class="active">About Us</a></li>
                 <li><a href="Impact.html">Impact</a></li>
+                <li><a href="awards.html">Awards</a></li>
                 <li><a href="members.html">Our Team</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
@@ -758,19 +743,19 @@
             <div class="container">
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <span class="stat-number">4</span>
+                        <span class="stat-number">12</span>
                         <span class="stat-label">Countries Reached</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">11</span>
+                        <span class="stat-number">18</span>
                         <span class="stat-label">Active Chapters</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">1,000+</span>
-                        <span class="stat-label">Students Inspired</span>
+                        <span class="stat-number">10,000+</span>
+                        <span class="stat-label">Students Educated</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">100+</span>
+                        <span class="stat-number">800</span>
                         <span class="stat-label">Volunteers</span>
                     </div>
                 </div>
@@ -784,41 +769,36 @@
                     <h2>Our Core Values</h2>
                     <p>The principles that guide everything we do</p>
                 </div>
-                <div class="values-grid">
-                    <div class="value-card">
-                        <div class="value-icon">💡</div>
-                        <h3>Innovation</h3>
-                        <p>We champion creative thinking and encourage novel approaches to learning and problem-solving.
-                        </p>
+                <div class="values-list">
+                    <div class="value-row">
+                        <span class="vl-num">01</span>
+                        <h3 class="vl-name">Innovation</h3>
+                        <p class="vl-desc">We champion creative thinking and encourage novel approaches to learning and problem-solving.</p>
                     </div>
-                    <div class="value-card">
-                        <div class="value-icon">🧠</div>
-                        <h3>Inclusivity</h3>
-                        <p>We are committed to creating equitable opportunities, ensuring every student has access to
-                            quality STEM education.</p>
+                    <div class="value-row">
+                        <span class="vl-num">02</span>
+                        <h3 class="vl-name">Inclusivity</h3>
+                        <p class="vl-desc">We are committed to creating equitable opportunities, ensuring every student has access to quality STEM education.</p>
                     </div>
-                    <div class="value-card">
-                        <div class="value-icon">🌱</div>
-                        <h3>Empowerment</h3>
-                        <p>We foster confidence and equip students with the tools to take ownership of their learning
-                            journey.</p>
+                    <div class="value-row">
+                        <span class="vl-num">03</span>
+                        <h3 class="vl-name">Empowerment</h3>
+                        <p class="vl-desc">We foster confidence and equip students with the tools to take ownership of their learning journey.</p>
                     </div>
-                    <div class="value-card">
-                        <div class="value-icon">🌍</div>
-                        <h3>Global Impact</h3>
-                        <p>We strive to make a difference worldwide, connecting communities through the power of STEM.
-                        </p>
+                    <div class="value-row">
+                        <span class="vl-num">04</span>
+                        <h3 class="vl-name">Global Impact</h3>
+                        <p class="vl-desc">We strive to make a difference worldwide, connecting communities through the power of STEM.</p>
                     </div>
-                    <div class="value-card">
-                        <div class="value-icon">⚖️</div>
-                        <h3>Integrity</h3>
-                        <p>We operate with transparency, honesty, and a strong ethical compass in all our endeavors.</p>
+                    <div class="value-row">
+                        <span class="vl-num">05</span>
+                        <h3 class="vl-name">Integrity</h3>
+                        <p class="vl-desc">We operate with transparency, honesty, and a strong ethical compass in all our endeavors.</p>
                     </div>
-                    <div class="value-card">
-                        <div class="value-icon">❤️</div>
-                        <h3>Passion</h3>
-                        <p>Our work is driven by a deep passion for education and a belief in the potential of every
-                            student.</p>
+                    <div class="value-row">
+                        <span class="vl-num">06</span>
+                        <h3 class="vl-name">Passion</h3>
+                        <p class="vl-desc">Our work is driven by a deep passion for education and a belief in the potential of every student.</p>
                     </div>
                 </div>
             </div>
@@ -919,6 +899,7 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="Impact.html">Impact</a></li>
+                        <li><a href="awards.html">Awards</a></li>
                         <li><a href="members.html">Our Team</a></li>
                         <li><a href="gallery.html">Gallery</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
@@ -938,7 +919,7 @@
                 });
             }, { threshold: 0.1 });
 
-            document.querySelectorAll('.value-card, .stat-item').forEach(el => {
+            document.querySelectorAll('.value-row, .stat-item').forEach(el => {
                 el.style.opacity = '0';
                 observer.observe(el);
             });
