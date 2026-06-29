@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -669,7 +669,7 @@
                             const loc        = parts[2] ? toTitle(parts[2]) : '';
                             const caption    = cityRaw && loc ? `${cityRaw}, ${loc}` : 'STEAMLabs Event';
                             addPhoto(cityRaw, {
-                                url:     `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${r.public_id}.${r.format}`,
+                                url:     `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_auto/${r.public_id}`,
                                 alt:     `STEAMLabs event${loc ? ' at ' + loc : ''}`,
                                 caption: caption
                             });

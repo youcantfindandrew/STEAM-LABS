@@ -1,50 +1,28 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STEAMLabs | Awards & Recognition</title>
-    <meta name="description" content="STEAMLabs members have earned recognition from Congress, the UN, Google, AWS, and more — plus academic scholarships and speaking invitations on four continents.">
+    <meta name="description" content="STEAMLabs members have earned recognition from Congress, the UN, Google, AWS, and more.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-
     <style>
         :root {
-            --dark: #0a0a0a;
-            --darker: #000;
-            --card: #141414;
-            --light: #f3f4f6;
-            --white: #ffffff;
-            --text-light: #f9fafb;
-            --text-dim: rgba(255,255,255,0.55);
-            --text-dark: #111111;
-            --text-mid: #555;
-            --border-dark: rgba(255,255,255,0.07);
-            --heading: 'Montserrat', sans-serif;
-            --body: 'Lato', sans-serif;
-            --accent: #818cf8;
-            --accent-dark: #6366f1;
-            --amber: #f59e0b;
-            --emerald: #10b981;
-            --rose: #f43f5e;
+            --dark: #0a0a0a; --darker: #000; --card: #141414; --light: #f3f4f6;
+            --white: #ffffff; --text-light: #f9fafb; --text-dim: rgba(255,255,255,0.55);
+            --text-dark: #111111; --text-mid: #555; --border-dark: rgba(255,255,255,0.07);
+            --heading: 'Montserrat', sans-serif; --body: 'Lato', sans-serif;
+            --accent: #818cf8; --accent-dark: #6366f1; --amber: #f59e0b; --emerald: #10b981; --rose: #f43f5e;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: var(--body); color: var(--text-light); background: var(--dark); overflow-x: hidden; }
         a { text-decoration: none; transition: all 0.3s ease; }
         .container { max-width: 1200px; width: 90%; margin: 0 auto; }
-
-        /* ── NAV ── */
-        header {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            padding: 1rem 0;
-            background: rgba(10,10,10,0.9);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
+        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1rem 0; background: rgba(10,10,10,0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.06); }
         nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; width: 90%; margin: 0 auto; }
         .logo-img { height: 45px; width: auto; }
         .nav-links { display: flex; list-style: none; gap: 2rem; align-items: center; }
@@ -56,207 +34,68 @@
         .nav-social svg { width: 22px; height: 22px; }
         .burger { display: none; cursor: pointer; z-index: 1001; }
         .burger div { width: 25px; height: 3px; background: #fff; margin: 5px; transition: all 0.3s; }
-
-        /* ── HERO ── */
-        .hero {
-            min-height: 90vh; display: flex; align-items: center;
-            background: var(--dark); padding: 9rem 0 5rem; position: relative; overflow: hidden;
-        }
-        .hero::before {
-            content: ''; position: absolute; inset: 0; pointer-events: none;
-            background:
-                radial-gradient(ellipse at 12% 60%, rgba(99,102,241,0.2) 0%, transparent 52%),
-                radial-gradient(ellipse at 88% 18%, rgba(245,158,11,0.12) 0%, transparent 45%),
-                radial-gradient(ellipse at 55% 95%, rgba(16,185,129,0.08) 0%, transparent 38%);
-        }
-        .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-        .hero-label {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px;
-            text-transform: uppercase; color: var(--accent);
-            border: 1px solid rgba(129,140,248,0.35); padding: 0.45rem 1rem;
-            border-radius: 50px; margin-bottom: 1.75rem;
-            background: rgba(129,140,248,0.07);
-        }
-        .hero-label::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-        .hero h1 {
-            font-family: var(--heading); font-size: clamp(3rem, 5.5vw, 4.8rem);
-            font-weight: 900; color: #fff; line-height: 1.06; margin-bottom: 1.5rem;
-        }
-        .hero h1 em { font-style: italic; color: var(--accent); }
-        .hero p { font-size: 1.05rem; color: rgba(255,255,255,0.52); line-height: 1.85; max-width: 480px; }
-        .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
-        .hero-stat {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 16px; padding: 1.6rem 1.5rem; border-top-width: 2.5px;
-        }
-        .hero-stat:nth-child(1) { border-top-color: var(--accent); }
-        .hero-stat:nth-child(2) { border-top-color: var(--amber); }
-        .hero-stat:nth-child(3) { border-top-color: var(--emerald); }
-        .hero-stat:nth-child(4) { border-top-color: var(--rose); }
-        .hero-stat-num { font-family: var(--heading); font-size: 2.6rem; font-weight: 900; color: #fff; line-height: 1; margin-bottom: 0.4rem; display: block; }
-        .hero-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.38); text-transform: uppercase; letter-spacing: 1.5px; }
-
-        /* ── MARQUEE ── */
-        .marquee-section {
-            background: var(--darker); padding: 1.4rem 0; overflow: hidden;
-            border-top: 1px solid rgba(129,140,248,0.12);
-            border-bottom: 1px solid rgba(129,140,248,0.12);
-        }
-        .marquee-track { display: flex; gap: 2.5rem; width: max-content; animation: marquee 48s linear infinite; align-items: center; }
-        .marquee-section:hover .marquee-track { animation-play-state: paused; }
-        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .marquee-item { display: flex; align-items: center; gap: 0.7rem; white-space: nowrap; flex-shrink: 0; }
-        .marquee-dot { width: 4px; height: 4px; background: var(--accent); opacity: 0.45; border-radius: 50%; }
-        .marquee-name { font-family: var(--heading); font-size: 0.76rem; font-weight: 700; color: rgba(255,255,255,0.38); letter-spacing: 1.5px; text-transform: uppercase; }
-
-        /* ── SHARED SECTION HEADERS ── */
         .section-eyebrow { font-family: var(--heading); font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.9rem; display: block; }
         .section-eyebrow.dark { color: var(--accent-dark); }
         .section-eyebrow.light { color: var(--accent); }
-
-        /* ── AWARDS INFINITE SCROLL ── */
-        .awards-section { background: var(--light); padding: 6rem 0 5rem; }
+        .awards-section { background: var(--light); padding: 8rem 0 5rem; }
         .awards-header { margin-bottom: 3rem; }
         .awards-header h2 { font-family: var(--heading); font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 900; color: var(--text-dark); line-height: 1.1; }
         .awards-header p { font-size: 0.95rem; color: var(--text-mid); margin-top: 0.5rem; }
-
         .awards-marquee-wrap { overflow: hidden; }
         .awards-marquee-wrap:hover .awards-track { animation-play-state: paused; }
         .awards-track { display: flex; gap: 1.25rem; width: max-content; animation: awardsScroll 48s linear infinite; padding: 0.5rem 1.25rem 1rem; align-items: stretch; }
         @keyframes awardsScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-        .award-item {
-            flex-shrink: 0; width: 192px;
-            background: #fff; border: 1.5px solid rgba(0,0,0,0.07);
-            border-radius: 18px; padding: 1.5rem 1.1rem 1.25rem;
-            text-decoration: none; display: flex; flex-direction: column;
-            align-items: center; text-align: center; gap: 0.6rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-            transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-        }
-        .award-item:hover { border-color: rgba(99,102,241,0.3); transform: translateY(-4px); box-shadow: 0 10px 28px rgba(99,102,241,0.1); animation-play-state: paused; }
-        .award-logo-frame {
-            width: 100%; height: 68px;
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-        }
-        .award-logo-frame img {
-            max-width: 100%; max-height: 100%; object-fit: contain;
-            filter: grayscale(1) contrast(1.1);
-            transition: filter 0.3s ease;
-        }
-        .award-item:hover .award-logo-frame img { filter: grayscale(0); }
-        .award-logo-placeholder {
-            font-family: var(--heading); font-weight: 900; font-size: 1rem;
-            color: var(--text-dark); letter-spacing: 0.5px;
-        }
-        .award-item-name { font-family: var(--heading); font-size: 0.75rem; font-weight: 700; color: var(--text-mid); line-height: 1.35; flex: 1; }
-        .award-item-amount { font-family: var(--heading); font-size: 0.88rem; font-weight: 800; color: var(--accent-dark); margin-top: auto; }
-
-        /* ── LOGO WALL ── */
+        .award-item { flex-shrink: 0; width: 265px; background: #fff; border: 1.5px solid rgba(0,0,0,0.07); border-radius: 18px; padding: 1.5rem 1.1rem 1.25rem; text-decoration: none; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.6rem; box-shadow: 0 2px 10px rgba(0,0,0,0.04); transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; }
+        .award-item:hover { border-color: rgba(99,102,241,0.3); transform: translateY(-4px); box-shadow: 0 10px 28px rgba(99,102,241,0.1); }
+        .award-logo-frame { width: 100%; height: 95px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .award-logo-frame img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .award-logo-placeholder { font-family: var(--heading); font-weight: 900; font-size: 1rem; color: var(--text-dark); letter-spacing: 0.5px; }
+        .award-item-name { font-family: var(--heading); font-size: 1rem; font-weight: 700; color: var(--text-mid); line-height: 1.35; flex: 1; }
+        .award-item-amount { font-family: var(--heading); font-size: 1.15rem; font-weight: 800; color: var(--accent-dark); margin-top: auto; }
+        .section-divider { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.12) 20%, rgba(0,0,0,0.12) 80%, transparent 100%); margin: 0 5%; }
+        .tech-section { background: #fff; padding: 5.5rem 0 5rem; }
+        .tech-header { margin-bottom: 3rem; }
+        .tech-header h2 { font-family: var(--heading); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--text-dark); line-height: 1.1; }
+        .tech-header p { font-size: 0.95rem; color: var(--text-mid); margin-top: 0.5rem; }
+        .tech-marquee-wrap { overflow: hidden; }
+        .tech-marquee-wrap:hover .tech-track { animation-play-state: paused; }
+        .tech-track { display: flex; gap: 1.25rem; width: max-content; animation: techScroll 40s linear infinite; padding: 0.5rem 1.25rem 1rem; align-items: stretch; }
+        @keyframes techScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .tech-item { flex-shrink: 0; width: 265px; background: #f5f7ff; border: 1.5px solid rgba(99,102,241,0.14); border-radius: 18px; padding: 1.5rem 1.1rem 1.25rem; text-decoration: none; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.6rem; box-shadow: 0 2px 10px rgba(99,102,241,0.06); transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; }
+        .tech-item:hover { border-color: rgba(99,102,241,0.38); transform: translateY(-4px); box-shadow: 0 10px 28px rgba(99,102,241,0.12); }
+        .tech-logo-frame { width: 100%; height: 95px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .tech-logo-frame img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .tech-logo-placeholder { font-family: var(--heading); font-weight: 900; font-size: 1rem; color: var(--text-dark); letter-spacing: 0.5px; }
+        .tech-item-name { font-family: var(--heading); font-size: 1rem; font-weight: 700; color: var(--text-mid); line-height: 1.35; flex: 1; }
+        .tech-item-amount { font-family: var(--heading); font-size: 1.15rem; font-weight: 800; color: var(--accent-dark); margin-top: auto; }
         .logo-wall-section { background: var(--light); padding: 5.5rem 0; }
         .logo-wall-header { margin-bottom: 2.75rem; }
         .logo-wall-header h2 { font-family: var(--heading); font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; color: var(--text-dark); }
         .logo-wall-header p { font-size: 0.92rem; color: var(--text-mid); max-width: 520px; margin: 0.5rem 0 0; }
-
         .logo-wall-grid { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid rgba(0,0,0,0.08); border-left: 1px solid rgba(0,0,0,0.08); }
-        .wall-logo-item {
-            flex: 0 0 calc(100% / 7); aspect-ratio: 2/1;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            border-right: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08);
-            text-decoration: none; padding: 1.25rem 0.75rem; gap: 0.5rem;
-            transition: background 0.25s ease; text-align: center;
-        }
+        .wall-logo-item { flex: 0 0 calc(100% / 7); aspect-ratio: 2/1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08); text-decoration: none; padding: 1.25rem 0.75rem; gap: 0.5rem; transition: background 0.25s ease; text-align: center; }
         .wall-logo-item:hover { background: rgba(99,102,241,0.05); }
-        .wall-logo-item img { max-width: 80%; max-height: 40px; object-fit: contain; filter: grayscale(1) contrast(0.8); transition: filter 0.3s, transform 0.3s; }
-        .wall-logo-item:hover img { filter: grayscale(0) contrast(1); transform: scale(1.06); }
+        .wall-logo-item img { max-width: 80%; max-height: 56px; object-fit: contain; transition: transform 0.3s; }
+        .wall-logo-item:hover img { transform: scale(1.06); }
         .wall-logo-text { font-family: var(--heading); font-weight: 900; font-size: 0.88rem; color: #222; letter-spacing: 0.5px; }
         .wall-logo-subtext { font-size: 0.67rem; color: rgba(0,0,0,0.38); line-height: 1.3; }
-
-        /* ── TECH PARTNERS ── */
-        .tech-section { background: var(--white); padding: 5.5rem 0; border-top: 1px solid rgba(0,0,0,0.06); }
-        .tech-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.75rem; flex-wrap: wrap; gap: 1rem; }
-        .tech-header h2 { font-family: var(--heading); font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; color: var(--text-dark); }
-        .tech-total-badge {
-            font-family: var(--heading); font-size: 0.82rem; font-weight: 700;
-            color: var(--accent-dark); border: 1.5px solid rgba(99,102,241,0.28);
-            padding: 0.45rem 1.1rem; border-radius: 50px;
-            background: rgba(99,102,241,0.05);
-        }
-        .tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
-        .tech-card {
-            border: 1.5px solid rgba(0,0,0,0.08); border-radius: 18px; padding: 2rem 1.5rem;
-            text-align: center; text-decoration: none; display: block;
-            transition: all 0.3s ease; background: #fff;
-        }
-        .tech-card:hover { border-color: rgba(99,102,241,0.28); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(99,102,241,0.07); }
-        .tech-logo-frame { height: 54px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
-        .tech-logo-frame img { max-height: 100%; max-width: 100%; object-fit: contain; filter: grayscale(1) contrast(0.7); transition: filter 0.3s; }
-        .tech-card:hover .tech-logo-frame img { filter: grayscale(0); }
-        .tech-logo-text { font-family: var(--heading); font-weight: 900; font-size: 1.1rem; color: #222; }
-        .tech-card h3 { font-family: var(--heading); font-size: 0.85rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.3rem; }
-        .tech-value { font-family: var(--heading); font-size: 1.5rem; font-weight: 900; color: var(--accent-dark); display: block; margin-bottom: 0.5rem; }
-        .tech-desc { font-size: 0.8rem; color: var(--text-mid); line-height: 1.55; margin: 0; }
-
-        /* ── ACADEMIC ── */
-        .academic-section { background: var(--dark); padding: 7rem 0; }
-        .academic-header { margin-bottom: 3.5rem; max-width: 620px; }
-        .academic-header h2 { font-family: var(--heading); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 900; color: #fff; margin-bottom: 0.75rem; }
-        .academic-header p { font-size: 0.97rem; color: rgba(255,255,255,0.42); line-height: 1.75; }
-        .academic-header strong { color: rgba(255,255,255,0.8); font-weight: 700; }
-
-        .academic-list { border-top: 1px solid rgba(255,255,255,0.07); }
-        .academic-row {
-            display: grid;
-            grid-template-columns: 3rem 1fr 1fr auto;
-            gap: 2rem; align-items: center;
-            padding: 2rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            text-decoration: none;
-            transition: padding 0.25s ease, background 0.25s ease;
-            border-radius: 0;
-        }
-        .academic-row:hover { background: rgba(255,255,255,0.025); padding-left: 1.25rem; padding-right: 1.25rem; margin: 0 -1.25rem; border-radius: 12px; }
-        .ac-num { font-family: var(--heading); font-size: 0.7rem; font-weight: 700; color: rgba(255,255,255,0.14); letter-spacing: 1px; align-self: start; padding-top: 0.2rem; }
-        .ac-main { min-width: 0; }
-        .ac-main h3 { font-family: var(--heading); font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 0.3rem; line-height: 1.25; }
-        .ac-institution { font-size: 0.8rem; color: rgba(255,255,255,0.35); display: block; }
-        .ac-desc { font-size: 0.82rem; color: rgba(255,255,255,0.32); line-height: 1.65; padding-right: 1rem; }
-        .ac-value { font-family: var(--heading); font-size: 1.5rem; font-weight: 900; color: #fff; white-space: nowrap; text-align: right; }
-
-        @media (max-width: 768px) {
-            .academic-row { grid-template-columns: 2rem 1fr auto; grid-template-rows: auto auto; gap: 0.5rem 1rem; padding: 1.5rem 0; }
-            .ac-desc { display: none; }
-            .ac-num { grid-row: 1; }
-            .ac-main { grid-row: 1; }
-            .ac-value { grid-row: 1; align-self: start; }
-        }
-
-        /* ── SPEAKING ── */
-        .speaking-section { background: var(--darker); padding: 7rem 0; border-top: 1px solid rgba(129,140,248,0.1); }
-        .speaking-header { margin-bottom: 3.5rem; }
-        .speaking-header h2 { font-family: var(--heading); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 900; color: #fff; }
-        .speaking-header p { font-size: 1rem; color: rgba(255,255,255,0.42); max-width: 550px; margin-top: 0.75rem; }
-
-        .speaking-top { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
-        .speaking-card {
-            background: #0d0d0d; border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 20px; padding: 2.5rem; text-decoration: none; display: block;
-            transition: all 0.35s ease; position: relative; overflow: hidden;
-        }
-        .speaking-top .speaking-card { border-left: 3px solid var(--accent); }
-        .speaking-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.6); border-color: rgba(129,140,248,0.25); }
-        .speaking-top .speaking-card:hover { border-left-color: var(--accent); }
-        .speaking-card-meta { display: flex; align-items: flex-start; gap: 1.25rem; margin-bottom: 1.5rem; }
-        .speaking-badge { width: 52px; height: 52px; border-radius: 12px; background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.22); display: flex; align-items: center; justify-content: center; font-family: var(--heading); font-weight: 900; font-size: 0.82rem; color: var(--accent); flex-shrink: 0; overflow: hidden; }
-        .speaking-badge img { width: 100%; height: 100%; object-fit: contain; padding: 8px; filter: brightness(0) invert(1); opacity: 0.75; }
-        .speaking-type { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; display: block; }
-        .speaking-org { font-family: var(--heading); font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.52); }
-        .speaking-card h3 { font-family: var(--heading); font-size: 1.15rem; font-weight: 800; color: #fff; line-height: 1.3; margin-bottom: 0.75rem; }
-        .speaking-card p { font-size: 0.87rem; color: rgba(255,255,255,0.42); margin: 0; line-height: 1.72; }
-        .speaking-bottom { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
-
-        /* ── FOOTER ── */
+        .speaking-section { background: #f3f4f6; padding: 6rem 0; border-top: none; }
+        .speaking-header { margin-bottom: 3rem; }
+        .speaking-header .section-eyebrow { color: #374151; }
+        .speaking-header h2 { font-family: var(--heading); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 900; color: #111111; line-height: 1.1; }
+        .speaking-header h2 em { font-style: italic; color: #111; }
+        .speaking-header p { font-size: 1rem; color: rgba(0,0,0,0.45); max-width: 550px; margin-top: 0.75rem; }
+        .speaking-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        .spk-card { background: #fff; border-radius: 16px; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; box-shadow: 0 2px 10px rgba(0,0,0,0.06); transition: transform 0.25s ease, box-shadow 0.25s ease; border: 1px solid rgba(0,0,0,0.08); }
+        .spk-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.12); }
+        .spk-card-logo { height: 150px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; padding: 0.5rem; border-bottom: 1px solid rgba(0,0,0,0.07); flex-shrink: 0; }
+        .spk-card-logo img { max-width: 95%; max-height: 130px; object-fit: contain; }
+        .spk-card-logo-fallback { font-family: var(--heading); font-size: 1.4rem; font-weight: 900; color: #374151; }
+        .spk-card-body { padding: 1.4rem 1.5rem 1.6rem; display: flex; flex-direction: column; flex: 1; }
+        .spk-card-pill { display: inline-block; font-family: var(--heading); font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #374151; background: rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.14); padding: 0.25rem 0.65rem; border-radius: 4px; margin-bottom: 0.75rem; width: fit-content; }
+        .spk-card-org { font-family: var(--heading); font-size: 0.68rem; font-weight: 700; color: rgba(0,0,0,0.35); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.35rem; }
+        .spk-card-title { font-family: var(--heading); font-size: 1rem; font-weight: 800; color: #111; line-height: 1.3; margin-bottom: 0.6rem; }
+        .spk-card-desc { font-size: 0.83rem; color: rgba(0,0,0,0.45); line-height: 1.65; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
         footer { background: #000; padding: 5rem 0 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
         .footer-top { display: flex; justify-content: space-between; gap: 3rem; margin-bottom: 3rem; flex-wrap: wrap; }
         .footer-about { max-width: 300px; }
@@ -270,54 +109,26 @@
         .footer-col a:hover { color: var(--accent); }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 2rem; text-align: center; }
         .footer-bottom p { font-size: 0.85rem; color: rgba(255,255,255,0.28); margin: 0; }
-
-        /* ── FADE IN ── */
         @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
         .fade-up { animation: fadeUp 0.65s ease forwards; }
-
-        /* ── RESPONSIVE ── */
-        @media (max-width: 1024px) {
-            .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
-            .hero-stats { grid-template-columns: repeat(4, 1fr); }
-            .academic-list { } /* rows handle their own responsive layout */
-            .tech-grid { grid-template-columns: repeat(2, 1fr); }
-            .wall-logo-item { flex: 0 0 calc(100% / 5); }
-        }
+        @media (max-width: 1024px) { .wall-logo-item { flex: 0 0 calc(100% / 5); } }
         @media (max-width: 768px) {
             .nav-links, .nav-social { display: none; }
             .burger { display: block; }
-            .hero { padding: 7rem 0 4rem; }
-            .hero-stats { grid-template-columns: repeat(2, 1fr); }
-            .speaking-top { grid-template-columns: 1fr; }
-            .speaking-bottom { grid-template-columns: 1fr; }
-            .tech-grid { grid-template-columns: 1fr 1fr; }
+            .speaking-grid { grid-template-columns: repeat(2, 1fr); }
             .wall-logo-item { flex: 0 0 calc(100% / 4); }
-            .tech-header { flex-direction: column; align-items: flex-start; }
             .footer-top, .footer-grid { flex-direction: column; }
-            .nav-links-mobile {
-                position: fixed; right: 0; top: 0; height: 100vh;
-                background: #0a0a0a; display: flex; flex-direction: column;
-                align-items: center; justify-content: center; width: 70%;
-                transform: translateX(100%); transition: transform 0.45s ease;
-                gap: 2rem; list-style: none; z-index: 999;
-            }
+            .nav-links-mobile { position: fixed; right: 0; top: 0; height: 100vh; background: #0a0a0a; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 70%; transform: translateX(100%); transition: transform 0.45s ease; gap: 2rem; list-style: none; z-index: 999; }
             .nav-links-mobile.nav-active { transform: translateX(0%); }
             .nav-links-mobile a { color: #fff; font-size: 1.1rem; font-weight: 600; }
             .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
             .toggle .line2 { opacity: 0; }
             .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
         }
-        @media (max-width: 480px) {
-            .tech-grid { grid-template-columns: 1fr; }
-            .wall-logo-item { flex: 0 0 calc(100% / 3); }
-            .hero-stats { grid-template-columns: 1fr 1fr; }
-        }
+        @media (max-width: 480px) { .wall-logo-item { flex: 0 0 calc(100% / 3); } .speaking-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
-
 <body>
-
-    <!-- ── NAV ── -->
     <header>
         <nav>
             <a href="index.html"><img src="https://i.ibb.co/Xf4CCb4j/Screenshot-2025-08-30-at-12-40-21-AM.png" alt="STEAMLabs" class="logo-img"></a>
@@ -338,49 +149,10 @@
             <div class="burger"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div>
         </nav>
     </header>
-
     <main>
-
-        <!-- ── HERO ── -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-inner">
-                    <div>
-                        <span class="hero-label">Awards &amp; Recognition</span>
-                        <h1>Built from<br><em>real work,</em><br>recognized<br>worldwide.</h1>
-                        <p>From competitive grants to UN partnerships — STEAMLabs and its leaders have earned recognition across four continents for advancing youth-driven STEM education.</p>
-                    </div>
-                    <div class="hero-stats">
-                        <div class="hero-stat">
-                            <span class="hero-stat-num">$26K+</span>
-                            <span class="hero-stat-label">Grants &amp; Awards</span>
-                        </div>
-                        <div class="hero-stat">
-                            <span class="hero-stat-num">$17K+</span>
-                            <span class="hero-stat-label">Tech Credits</span>
-                        </div>
-                        <div class="hero-stat">
-                            <span class="hero-stat-num">33+</span>
-                            <span class="hero-stat-label">Recognitions</span>
-                        </div>
-                        <div class="hero-stat">
-                            <span class="hero-stat-num">4</span>
-                            <span class="hero-stat-label">Continents</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── MARQUEE ── -->
-        <div class="marquee-section" aria-hidden="true">
-            <div class="marquee-track" id="marqueeTrack"></div>
-        </div>
-
-        <!-- ── MULTI-ITEM CAROUSEL ── -->
         <section class="awards-section">
             <div class="awards-header container">
-                <span class="section-eyebrow dark">Community Grants &amp; Awards · $8,750 raised</span>
+                <span class="section-eyebrow dark">Community Grants &amp; Awards &middot; $8,750 raised</span>
                 <h2>Awards &amp; Recognitions</h2>
                 <p>Grants, fellowships, and recognitions from organizations across the globe.</p>
             </div>
@@ -388,61 +160,40 @@
                 <div class="awards-track" id="awardsTrack"></div>
             </div>
         </section>
-
-        <!-- ── LOGO WALL ── -->
+        <div class="section-divider"></div>
+        <section class="tech-section">
+            <div class="tech-header container">
+                <span class="section-eyebrow dark">Technology Credits &middot; ~$17,300 in-kind</span>
+                <h2>Tech Infrastructure Credits</h2>
+                <p>Cloud compute, mapping APIs, and communication tools donated by major technology companies to power STEAMLabs.</p>
+            </div>
+            <div class="tech-marquee-wrap">
+                <div class="tech-track" id="techTrack"></div>
+            </div>
+        </section>
+        <div class="section-divider"></div>
         <section class="logo-wall-section">
             <div class="container">
                 <div class="logo-wall-header">
                     <span class="section-eyebrow dark">All Partners</span>
                     <h2>Our Community of Support</h2>
-                    <p>Every organization that has recognized or funded STEAMLabs' mission. Click any to visit their site.</p>
+                    <p>Every organization that has recognized, funded, or supported STEAMLabs. Click any to visit their site.</p>
                 </div>
                 <div class="logo-wall-grid" id="logoWallGrid"></div>
             </div>
         </section>
-
-        <!-- ── TECH PARTNERS ── -->
-        <section class="tech-section">
-            <div class="container">
-                <div class="tech-header">
-                    <div>
-                        <span class="section-eyebrow dark">Supported By</span>
-                        <h2>Technology Partners</h2>
-                    </div>
-                    <span class="tech-total-badge">$17,300+ in Credits</span>
-                </div>
-                <div class="tech-grid" id="techGrid"></div>
-            </div>
-        </section>
-
-        <!-- ── ACADEMIC HONORS ── -->
-        <section class="academic-section">
-            <div class="container">
-                <div class="academic-header">
-                    <span class="section-eyebrow light">Scholarship &amp; Leadership</span>
-                    <h2>Academic Honors</h2>
-                    <p>Personal awards earned by <strong>Daniel Zhang</strong>, International President — selected from thousands of applicants at the national and university level.</p>
-                </div>
-                <div class="academic-list" id="academicGrid"></div>
-            </div>
-        </section>
-
-        <!-- ── SPEAKING ── -->
+        <div class="section-divider"></div>
         <section class="speaking-section">
             <div class="container">
                 <div class="speaking-header">
                     <span class="section-eyebrow light">On the Global Stage</span>
-                    <h2>Speaking &amp;<br>Formal Recognition</h2>
-                    <p>From California's State Senate to the United Nations — STEAMLabs has been invited to speak, partner, and lead.</p>
+                    <h2>Speaking &amp; <em>Formal</em> Recognition</h2>
+                    <p>From California's State Senate to the United Nations &mdash; STEAMLabs has been invited to speak, partner, and lead.</p>
                 </div>
-                <div class="speaking-top" id="speakingTop"></div>
-                <div class="speaking-bottom" id="speakingBottom"></div>
+                <div class="speaking-grid" id="speakingGrid"></div>
             </div>
         </section>
-
     </main>
-
-    <!-- ── FOOTER ── -->
     <footer>
         <div class="container">
             <div class="footer-top">
@@ -451,255 +202,133 @@
                     <p>STEAMLabs is a not-for-profit organization. <a href="index.html#donate" style="color:#60a5fa;">Donate today!</a></p>
                 </div>
                 <div class="footer-grid">
-                    <div class="footer-col">
-                        <h4>About</h4>
-                        <ul>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="members.html">Our Team</a></li>
-                            <li><a href="Impact.html">Our Impact</a></li>
-                            <li><a href="awards.html">Awards</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Resources</h4>
-                        <ul>
-                            <li><a href="gallery.html">Gallery</a></li>
-                            <li><a href="upload.html">Chapter Portal</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Contact</h4>
-                        <ul><li><a href="mailto:steamlabsintl@gmail.com">steamlabsintl@gmail.com</a></li></ul>
-                    </div>
+                    <div class="footer-col"><h4>About</h4><ul><li><a href="about.html">About Us</a></li><li><a href="members.html">Our Team</a></li><li><a href="Impact.html">Our Impact</a></li><li><a href="awards.html">Awards</a></li></ul></div>
+                    <div class="footer-col"><h4>Resources</h4><ul><li><a href="gallery.html">Gallery</a></li><li><a href="upload.html">Chapter Portal</a></li></ul></div>
+                    <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:steamlabsintl@gmail.com">steamlabsintl@gmail.com</a></li></ul></div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 STEAMLabs. All Rights Reserved. STEAMLabs is a registered 501(c)(3) nonprofit organization.</p>
-            </div>
+            <div class="footer-bottom"><p>&copy; 2025 STEAMLabs. All Rights Reserved. STEAMLabs is a registered 501(c)(3) nonprofit organization.</p></div>
         </div>
     </footer>
-
     <script>
-    // ── DATA ─────────────────────────────────────────────────────────────────
-
     const communityAwards = [
-        { abbr: "YPL",  name: "Young Planet Leader Grant",          org: "Young Planet Leaders",            amount: "$1,000",        url: "https://youngplanetleaders.org/featured-leaders-2/",               img: "https://youngplanetleaders.org/wp-content/uploads/2024/05/YPL-Banners-5.png" },
-        { abbr: "ASCB", name: "ASCB COMPASS Grant",                 org: "American Society for Cell Biology", amount: "$1,000",      url: "https://www.ascb.org/grants-awards/compass-outreach-grants/",      img: "https://www.ascb.org/wp-content/uploads/2018/10/ascb_logo.png" },
-        { abbr: "YLS",  name: "YLS Gold Impact Award",              org: "Youth Leadership Summit",         amount: "$1,000",        url: "https://youthsummitusa.com/",                                      img: "https://logo.clearbit.com/youthsummitusa.com" },
-        { abbr: "NH",   name: "Naval Horizons Grant",               org: "Naval Horizons",                  amount: "$800",          url: "https://www.navalhorizons.us/",                                    img: "https://logo.clearbit.com/navalhorizons.us" },
-        { abbr: "AC",   name: "Community Impact Grant",             org: "Ability Central",                 amount: "$750",          url: "https://abilitycentral.org",                                       img: "https://logo.clearbit.com/abilitycentral.org" },
-        { abbr: "SANE", name: "ELI Fellowship",                     org: "SANE",                            amount: "$750",          url: "https://seekcommonground.org/sane",                                img: "https://images.squarespace-cdn.com/content/v1/58bc42c5725e258dbec200cf/1596739787070-AWT1OI73WD80YXDC3V5N/output-onlinepngtools+%286%29.png?format=500w" },
-        { abbr: "LIL",  name: "IdeAction Pitch Grant",              org: "Leadership &amp; Innovation Lab", amount: "$700",          url: "https://leadershipinnovationlab.org/ideaction-competition",        img: "https://img1.wsimg.com/isteam/ip/b5123333-6230-4d94-a84d-8111e500bb03/LIL-b04c4c4.png/:/rs=h:120,cg:true,m/qt=q:95" },
-        { abbr: "KOM",  name: "Call for Kindness Grant",            org: "Kind Over Matter",                amount: "$500",          url: "https://kindovermatter.com/matt-kurtz-kindness-grant-winner-announcement-19/", img: "https://kindovermatter.com/wp-content/themes/kom-theme/images/kom-logo_302_200.png" },
-        { abbr: "CCP",  name: "Cornell Contribution Grant",         org: "The Contribution Project",        amount: "$400",          url: "https://contributionproject.org/",                                 img: "https://logo.clearbit.com/contributionproject.org" },
-        { abbr: "LIL",  name: "Virtual Club Fair Award",            org: "Leadership &amp; Innovation Lab", amount: "$200",          url: "https://leadershipinnovationlab.org/virtual-student-club-fair",   img: "https://img1.wsimg.com/isteam/ip/b5123333-6230-4d94-a84d-8111e500bb03/LIL-b04c4c4.png/:/rs=h:120,cg:true,m/qt=q:95" },
-        { abbr: "YC",   name: "Calgary Youth Microgrant",           org: "Youth Central",                   amount: "$200",          url: "https://youthcentral.com/grants/",                                 img: "https://youthcentral.com/wp-content/uploads/2016/04/Youth-Central-Black-PNG.png" },
-        { abbr: "CCA",  name: "CCA Winter SLC Grant",               org: "Canyon Crest Academy SLC",        amount: "$150",          url: "https://www.studentleadershipclub.org/",                           img: "https://logo.clearbit.com/ccasandiego.com" },
-        { abbr: "PSA",  name: "Gold Presidential Volunteer Award",  org: "Presidential Service Awards",     amount: "×2 Recipients", url: "https://presidentialserviceawards.gov/",                           img: "https://logo.clearbit.com/presidentialserviceawards.gov" },
-        { abbr: "UNA",  name: "National Community Service Award",   org: "UNA–USA",                         amount: "×3 Recipients", url: "https://unausa.org",                                               img: "https://unausa.org/wp-content/uploads/2018/11/UNA-USA-Logo-Primary.png" },
+        { abbr: "YPL",  name: "Young Planet Leader Grant",         org: "Young Planet Leaders",              amount: "$1,000",        url: "https://youngplanetleaders.org/featured-leaders-2/",               img: "images/logos/logo_0.png" },
+        { abbr: "ASCB", name: "ASCB COMPASS Grant",                org: "American Society for Cell Biology", amount: "$1,000",        url: "https://www.ascb.org/grants-awards/compass-outreach-grants/",      img: "images/logos/logo_1.png" },
+        { abbr: "YLS",  name: "YLS Gold Impact Award",             org: "Youth Leadership Summit",           amount: "$1,000",        url: "https://youthsummitusa.com/",                                      img: "images/logos/logo_2.png" },
+        { abbr: "NH",   name: "Naval Horizons Grant",              org: "Naval Horizons",                    amount: "$800",          url: "https://www.navalhorizons.us/",                                    img: "images/logos/logo_3.png" },
+        { abbr: "AC",   name: "Community Impact Grant",            org: "Ability Central",                   amount: "$750",          url: "https://abilitycentral.org",                                       img: "images/logos/logo_5.png" },
+        { abbr: "SANE", name: "ELI Fellowship",                    org: "SANE",                              amount: "$750",          url: "https://seekcommonground.org/sane",                                img: "images/logos/logo_6.png" },
+        { abbr: "LIL",  name: "IdeAction Pitch Grant",             org: "Leadership and Innovation Lab",     amount: "$700",          url: "https://leadershipinnovationlab.org/ideaction-competition",        img: "images/logos/logo_8.png" },
+        { abbr: "KOM",  name: "Call for Kindness Grant",           org: "Kind Over Matter",                  amount: "$500",          url: "https://kindovermatter.com/matt-kurtz-kindness-grant-winner-announcement-19/", img: "images/logos/logo_9.png" },
+        { abbr: "CCP",  name: "Cornell Contribution Grant",        org: "The Contribution Project",          amount: "$400",          url: "https://contributionproject.org/",                                 img: "images/logos/logo_10.png" },
+        { abbr: "LIL",  name: "Virtual Club Fair Award",           org: "Leadership and Innovation Lab",     amount: "$200",          url: "https://leadershipinnovationlab.org/virtual-student-club-fair",   img: "images/logos/logo_11.png" },
+        { abbr: "YC",   name: "Calgary Youth Microgrant",          org: "Youth Central",                     amount: "$200",          url: "https://youthcentral.com/grants/",                                 img: "images/logos/logo_12.png" },
+        { abbr: "CCA",  name: "CCA Winter SLC Grant",              org: "Canyon Crest Academy SLC",          amount: "$150",          url: "https://www.studentleadershipclub.org/",                           img: "images/logos/logo_13.png" },
+        { abbr: "PSA",  name: "Gold Presidential Volunteer Award", org: "Presidential Service Awards",       amount: "x2 Recipients", url: "https://presidentialserviceawards.gov/",                           img: "images/logos/logo_15.png" },
+        { abbr: "UNA",  name: "National Community Service Award",  org: "UNA-USA",                           amount: "x3 Recipients", url: "https://unausa.org",                                               img: "images/logos/logo_16.png" },
     ];
-
-    const techPartners = [
-        { abbr: "AWS",  name: "AWS Social Impact Credits",  value: "$10,000", desc: "Amazon Web Services nonprofit grant powering STEAMLabs' cloud infrastructure.",     url: "https://aws.amazon.com/government-education/nonprofits/", img: "https://logo.clearbit.com/aws.amazon.com" },
-        { abbr: "G",    name: "Google for Nonprofits",      value: "$3,000",  desc: "Google for Nonprofits — powers the chapter map on the STEAMLabs website.",          url: "https://www.google.com/nonprofits/",                     img: "https://logo.clearbit.com/google.com" },
-        { abbr: "MS",   name: "Microsoft Elevate Credits",  value: "$2,000",  desc: "Microsoft Elevate program credits for youth nonprofit organizations.",               url: "https://www.microsoft.com/en-us/nonprofits",             img: "https://logo.clearbit.com/microsoft.com" },
-        { abbr: "TS",   name: "AWS via TechSoup",           value: "$1,000",  desc: "Additional AWS credits via TechSoup's nonprofit discount program.",                  url: "https://www.techsoup.org",                              img: "https://logo.clearbit.com/techsoup.org" },
-        { abbr: "GCP",  name: "Google Cloud Credits",       value: "$600",    desc: "Google Cloud credits for STEAMLabs dev and data tools ($300 × 2).",                 url: "https://cloud.google.com",                              img: "https://logo.clearbit.com/cloud.google.com" },
-        { abbr: "GM",   name: "Google Maps Platform",       value: "$500",    desc: "Direct Google Maps Platform credits for STEAMLabs mapping features.",               url: "https://cloud.google.com/maps-platform",                img: "https://logo.clearbit.com/google.com" },
-        { abbr: "TWL",  name: "Twilio Impact Access",       value: "$100",    desc: "Twilio.org credits for STEAMLabs communication and outreach tools.",                url: "https://www.twilio.org",                                img: "https://logo.clearbit.com/twilio.com" },
-        { abbr: "AWS",  name: "AWS Free Tier Credits",      value: "$100",    desc: "AWS nonprofit free-tier credits for core hosting infrastructure.",                   url: "https://aws.amazon.com",                                img: "https://logo.clearbit.com/aws.amazon.com" },
+    const techCredits = [
+        { abbr: "AWS",  name: "AWS Social Impact Credits",         org: "Amazon Web Services",   amount: "$10,000", url: "https://aws.amazon.com/government-education/nonprofits/", img: "images/logos/logo_17.png" },
+        { abbr: "GMN",  name: "Google Maps for Nonprofits",        org: "Google for Nonprofits", amount: "$3,000",  url: "https://www.google.com/nonprofits/",                      img: "images/logos/logo_18.png" },
+        { abbr: "MSFT", name: "Azure Elevate Nonprofit Credits",   org: "Microsoft",             amount: "$2,000",  url: "https://www.microsoft.com/en-us/nonprofits",             img: "images/logos/logo_19.png" },
+        { abbr: "TS",   name: "AWS via TechSoup Credits",          org: "TechSoup",              amount: "$1,000",  url: "https://www.techsoup.org",                               img: "images/logos/logo_20.png" },
+        { abbr: "GCP",  name: "Google Cloud Credits",              org: "Google Cloud",          amount: "$600",    url: "https://cloud.google.com",                               img: "images/logos/logo_21.png" },
+        { abbr: "GMAP", name: "Google Maps Platform Credits",      org: "Google",                amount: "$500",    url: "https://cloud.google.com/maps-platform",                 img: "images/logos/logo_22.png" },
+        { abbr: "AWS",  name: "AWS Nonprofit Free Tier",           org: "Amazon Web Services",   amount: "$100",    url: "https://aws.amazon.com",                                 img: "images/logos/logo_23.png" },
+        { abbr: "TWL",  name: "Twilio Impact Access Program",      org: "Twilio.org",            amount: "$100",    url: "https://www.twilio.org",                                 img: "images/logos/logo_24.png" },
     ];
-
-    const academic = [
-        { name: "Carson Scholar",              institution: "Carson Scholars Fund",                    value: "$1,000",   desc: "Awarded to Daniel Zhang for exceptional academic achievement and community impact — one of roughly 500 recipients selected nationally each year.",           url: "https://carsonscholars.org" },
-        { name: "Rensselaer Medal",            institution: "Rensselaer Polytechnic Institute",         value: "$40K/yr",  desc: "The highest honor RPI confers on high school juniors — awarded to one student per partner school across the United States.",                             url: "https://rpi.edu" },
-        { name: "Bausch + Lomb Science Award", institution: "University of Rochester",                  value: "$20K",     desc: "A science excellence award for outstanding achievement — given to a single recipient per partner high school, nationwide.",                              url: "https://rochester.edu" },
-        { name: "DAR Youth Leadership Medal",  institution: "Daughters of the American Revolution",     value: "1 per HS", desc: "Presented to Daniel Zhang at Canyon Crest Academy by the local DAR chapter in recognition of leadership, service, and academic distinction.",            url: "https://dar.org" },
-    ];
-
     const speakingFeatured = [
-        { abbr: "UN",  type: "Accepted Session Presenter", org: "United Nations", name: "2026 UN Science Summit — NYC",       desc: "STEAMLabs and Tumor Tactics accepted as a session presenter at the UN Science Summit in New York City (September 2026), bringing youth-driven STEM to the world's foremost scientific convening.", url: "https://un.org",  img: "https://logo.clearbit.com/un.org" },
-        { abbr: "IYC", type: "Panelist &amp; Invited Speaker", org: "IYC13 at UCLA", name: "IYC13 at UCLA — AI for Peace Panel", desc: "Panelist on 'Youth-Driven AI for Peace and Global Governance' alongside UNICEF, ServiceNow, and UNA-USA at the 13th International Youth Congress.", url: "https://un.org", img: "https://logo.clearbit.com/un.org" },
+        { abbr: "UN",  type: "Accepted Session Presenter", org: "United Nations", name: "2026 UN Science Summit - NYC",       desc: "STEAMLabs and Tumor Tactics accepted as a session presenter at the UN Science Summit in New York City (September 2026), bringing youth-driven STEM to the world's foremost scientific convening.", url: "https://un.org", img: "images/logos/logo_38.png" },
+        { abbr: "IYC", type: "Panelist and Invited Speaker", org: "IYC13 at UCLA",  name: "IYC13 at UCLA - AI for Peace Panel", desc: "Panelist on Youth-Driven AI for Peace and Global Governance alongside UNICEF, ServiceNow, and UNA-USA at the 13th International Youth Congress.", url: "https://un.org", img: "images/logos/logo_37.png" },
     ];
-
     const speakingOther = [
-        { abbr: "CA",  type: "Community Champion",  org: "CA State Senate",       name: "Senator Blakespear Recognition",    desc: "Daniel Zhang named Community Champion of the Month (August 2025) by CA State Senator Catherine Blakespear, District 38.",    url: "https://sd38.senate.ca.gov",                          img: "https://logo.clearbit.com/senate.ca.gov" },
-        { abbr: "WB",  type: "USA Delegate",        org: "World Bank",            name: "World Bank Group Youth Summit",     desc: "Daniel Zhang selected as a USA Delegate to the World Bank Group Youth Summit, Washington D.C.",                            url: "https://worldbank.org",                               img: "https://logo.clearbit.com/worldbank.org" },
-        { abbr: "YSA", type: "Official Organizer",  org: "Youth Service America", name: "Global Youth Service Day 2026",     desc: "STEAMLabs selected as an official organizing partner for Global Youth Service Day 2026.",                                   url: "https://ysa.org",                                     img: "https://ysa.org/wp-content/uploads/2024/03/ysa_logo_wordmark_02.2024.png" },
-        { abbr: "UN",  type: "Official Partner",    org: "UN MGCY",               name: "UN Major Group — Children &amp; Youth", desc: "STEAMLabs recognized as an official partner of the UN Major Group for Children and Youth.",                            url: "https://un.org",                                      img: "https://logo.clearbit.com/un.org" },
-        { abbr: "YPL", type: "Featured Leader",     org: "Young Planet Leaders",  name: "Featured Young Planet Leader",      desc: "Daniel Zhang featured as a Young Planet Leader by the Young Planet Leaders Foundation (September 2026).",                  url: "https://youngplanetleaders.org/featured-leaders-2/",  img: "https://youngplanetleaders.org/wp-content/uploads/2024/05/YPL-Banners-5.png" },
+        { abbr: "CA",  type: "Community Champion", org: "CA State Senate",       name: "Senator Blakespear Recognition",           desc: "Daniel Zhang named Community Champion of the Month (August 2025) by CA State Senator Catherine Blakespear, District 38.",  url: "https://sd38.senate.ca.gov",                         img: "images/logos/logo_31.png" },
+        { abbr: "WB",  type: "USA Delegate",       org: "World Bank",            name: "World Bank Group Youth Summit",            desc: "Daniel Zhang selected as a USA Delegate to the World Bank Group Youth Summit, Washington D.C.",                          url: "https://worldbank.org",                              img: "images/logos/world-bank-summit.jpg" },
+        { abbr: "YSA", type: "Official Organizer", org: "Youth Service America", name: "Global Youth Service Day 2026",            desc: "STEAMLabs selected as an official organizing partner for Global Youth Service Day 2026.",                                 url: "https://ysa.org",                                    img: "images/logos/gysd.png" },
+        { abbr: "UN",  type: "Official Partner",   org: "UN MGCY",               name: "UN Major Group - Children and Youth",      desc: "STEAMLabs recognized as an official partner of the UN Major Group for Children and Youth.",                              url: "https://un.org",                                     img: "images/logos/logo_33.png" },
+        { abbr: "YPL", type: "Featured Leader",    org: "Young Planet Leaders",  name: "Featured Young Planet Leader",             desc: "Daniel Zhang featured as a Young Planet Leader by the Young Planet Leaders Foundation (September 2026).",                url: "https://youngplanetleaders.org/featured-leaders-2/", img: "images/logos/ypl.png" },
     ];
-
-    // ── MARQUEE ──────────────────────────────────────────────────────────────
-
-    function buildMarquee() {
-        const track = document.getElementById('marqueeTrack');
-        const all = [...communityAwards, ...techPartners];
-        // Double for seamless loop
-        const doubled = [...all, ...all];
-        track.innerHTML = doubled.map(a =>
-            `<span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-name">${a.org || a.name}</span></span>`
-        ).join('');
-    }
-
-    // ── AWARDS INFINITE SCROLL ───────────────────────────────────────────────
-
     function buildAwardsMarquee() {
         const track = document.getElementById('awardsTrack');
         const doubled = [...communityAwards, ...communityAwards];
         track.innerHTML = doubled.map(a => `
             <a href="${a.url}" target="_blank" rel="noopener" class="award-item">
                 <div class="award-logo-frame">
-                    <img src="${a.img}" alt="${a.org}" loading="lazy"
-                         onerror="this.hidden=true;var n=this.nextElementSibling;if(n)n.hidden=false">
+                    <img src="${a.img}" alt="${a.org}" loading="lazy" onerror="this.hidden=true;var n=this.nextElementSibling;if(n)n.hidden=false">
                     <div class="award-logo-placeholder" hidden>${a.abbr}</div>
                 </div>
                 <div class="award-item-name">${a.name}</div>
                 <div class="award-item-amount">${a.amount}</div>
-            </a>
-        `).join('');
+            </a>`).join('');
     }
-
-    // ── LOGO WALL ─────────────────────────────────────────────────────────────
-
+    function buildTechMarquee() {
+        const track = document.getElementById('techTrack');
+        const doubled = [...techCredits, ...techCredits];
+        track.innerHTML = doubled.map(t => `
+            <a href="${t.url}" target="_blank" rel="noopener" class="tech-item">
+                <div class="tech-logo-frame">
+                    <img src="${t.img}" alt="${t.org}" loading="lazy" onerror="this.hidden=true;var n=this.nextElementSibling;if(n)n.hidden=false">
+                    <div class="tech-logo-placeholder" hidden>${t.abbr}</div>
+                </div>
+                <div class="tech-item-name">${t.name}</div>
+                <div class="tech-item-amount">${t.amount}</div>
+            </a>`).join('');
+    }
     function buildLogoWall() {
         const grid = document.getElementById('logoWallGrid');
-        grid.innerHTML = communityAwards.map(a => `
+        const allLogos = [...communityAwards, ...techCredits];
+        grid.innerHTML = allLogos.map(a => `
             <a href="${a.url}" target="_blank" rel="noopener" class="wall-logo-item">
-                <img src="${a.img}" alt="${a.org}"
-                     onerror="this.hidden=true;var n=this.nextElementSibling;if(n)n.hidden=false">
+                <img src="${a.img}" alt="${a.org}" onerror="this.hidden=true;var n=this.nextElementSibling;if(n)n.hidden=false">
                 <div class="wall-logo-text" hidden>${a.abbr}</div>
-                <div class="wall-logo-subtext">${a.org.replace('&amp;', '&')}</div>
-            </a>
-        `).join('');
+                <div class="wall-logo-subtext">${a.org}</div>
+            </a>`).join('');
     }
-
-    // ── TECH GRID ─────────────────────────────────────────────────────────────
-
-    function buildTech() {
-        document.getElementById('techGrid').innerHTML = techPartners.map(t => `
-            <a href="${t.url}" target="_blank" rel="noopener" class="tech-card">
-                <div class="tech-logo-frame">
-                    <img src="${t.img}" alt="${t.name}"
-                         onerror="this.hidden=true;var n=this.nextElementSibling;if(n)n.hidden=false">
-                    <div class="tech-logo-text" hidden>${t.abbr}</div>
-                </div>
-                <h3>${t.name}</h3>
-                <span class="tech-value">${t.value}</span>
-                <p class="tech-desc">${t.desc}</p>
-            </a>
-        `).join('');
-    }
-
-    // ── ACADEMIC ──────────────────────────────────────────────────────────────
-
-    function buildAcademic() {
-        document.getElementById('academicGrid').innerHTML = academic.map((a, i) => `
-            <a href="${a.url}" target="_blank" rel="noopener" class="academic-row">
-                <span class="ac-num">0${i + 1}</span>
-                <div class="ac-main">
-                    <h3>${a.name}</h3>
-                    <span class="ac-institution">${a.institution}</span>
-                </div>
-                <p class="ac-desc">${a.desc}</p>
-                <span class="ac-value">${a.value}</span>
-            </a>
-        `).join('');
-    }
-
-    // ── SPEAKING ──────────────────────────────────────────────────────────────
-
     function buildSpeaking() {
-        document.getElementById('speakingTop').innerHTML = speakingFeatured.map(s => `
-            <a href="${s.url}" target="_blank" rel="noopener" class="speaking-card">
-                <div class="speaking-card-meta">
-                    <div class="speaking-badge">
-                        <img src="${s.img}" alt="${s.org}" loading="lazy"
-                             onerror="this.hidden=true;var n=this.nextElementSibling;if(n)n.hidden=false">
-                        <span hidden>${s.abbr}</span>
-                    </div>
-                    <div>
-                        <span class="speaking-type">${s.type}</span>
-                        <div class="speaking-org">${s.org}</div>
-                    </div>
+        const all = [...speakingFeatured, ...speakingOther];
+        document.getElementById('speakingGrid').innerHTML = all.map(s => `
+            <a href="${s.url}" target="_blank" rel="noopener" class="spk-card">
+                <div class="spk-card-logo">
+                    <img src="${s.img}" alt="${s.org}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false">
+                    <span class="spk-card-logo-fallback" hidden>${s.abbr}</span>
                 </div>
-                <h3>${s.name}</h3>
-                <p>${s.desc}</p>
-            </a>
-        `).join('');
-
-        document.getElementById('speakingBottom').innerHTML = speakingOther.map(s => `
-            <a href="${s.url}" target="_blank" rel="noopener" class="speaking-card">
-                <div class="speaking-card-meta">
-                    <div class="speaking-badge">
-                        <img src="${s.img}" alt="${s.org}" loading="lazy"
-                             onerror="this.hidden=true;var n=this.nextElementSibling;if(n)n.hidden=false">
-                        <span hidden>${s.abbr}</span>
-                    </div>
-                    <div>
-                        <span class="speaking-type">${s.type}</span>
-                        <div class="speaking-org">${s.org}</div>
-                    </div>
+                <div class="spk-card-body">
+                    <span class="spk-card-pill">${s.type}</span>
+                    <div class="spk-card-org">${s.org}</div>
+                    <div class="spk-card-title">${s.name}</div>
+                    <p class="spk-card-desc">${s.desc}</p>
                 </div>
-                <h3>${s.name}</h3>
-                <p>${s.desc}</p>
-            </a>
-        `).join('');
+            </a>`).join('');
     }
-
-    // ── SCROLL ANIMATIONS ─────────────────────────────────────────────────────
-
     function initObserver() {
         const obs = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) { e.target.classList.add('fade-up'); obs.unobserve(e.target); }
-            });
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('fade-up'); obs.unobserve(e.target); } });
         }, { threshold: 0.07 });
-        document.querySelectorAll('.hero-stat, .wall-logo-item, .tech-card, .academic-row, .speaking-card').forEach(el => {
-            el.style.opacity = '0'; obs.observe(el);
-        });
+        document.querySelectorAll('.wall-logo-item, .spk-card').forEach(el => { el.style.opacity = '0'; obs.observe(el); });
     }
-
-    // ── MOBILE NAV ────────────────────────────────────────────────────────────
-
     function initNav() {
         const burger = document.querySelector('.burger');
         const headerEl = document.querySelector('header');
         burger.addEventListener('click', () => {
             burger.classList.toggle('toggle');
             let nav = document.querySelector('.nav-links-mobile');
-            if (nav) { nav.remove(); }
-            else {
+            if (nav) { nav.remove(); } else {
                 nav = document.createElement('ul');
                 nav.className = 'nav-links-mobile';
-                nav.innerHTML = `
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="Impact.html">Impact</a></li>
-                    <li><a href="awards.html">Awards</a></li>
-                    <li><a href="members.html">Our Team</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                `;
+                nav.innerHTML = '<li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="Impact.html">Impact</a></li><li><a href="awards.html">Awards</a></li><li><a href="members.html">Our Team</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact Us</a></li>';
                 headerEl.appendChild(nav);
                 setTimeout(() => nav.classList.add('nav-active'), 10);
             }
         });
     }
-
-    // ── INIT ──────────────────────────────────────────────────────────────────
-
     document.addEventListener('DOMContentLoaded', () => {
-        buildMarquee();
         buildAwardsMarquee();
+        buildTechMarquee();
         buildLogoWall();
-        buildTech();
-        buildAcademic();
         buildSpeaking();
         initObserver();
         initNav();
     });
     </script>
-
 </body>
 </html>
